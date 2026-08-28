@@ -540,7 +540,7 @@ padding: 15px;
       </thead>
       <tbody id="batchTableBody">
         <tr>
-          <td colspan="5" style="text-align: center; color: #999; padding: 20px;">กำลังโหลดข้อมูลรอบขนส่ง...</td>
+          <td colspan="5" style="text-align: center; color: #999; padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td>
         </tr>
       </tbody>
     </table>
@@ -621,7 +621,7 @@ async function loadShippingBatches() {
     tbody.innerHTML = html;
   } catch (err) {
     console.error(err);
-    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: red; padding: 20px;">โหลดข้อมูลล้มเหลว</td></tr>`;
+    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: #999; padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
   }
 }
 
