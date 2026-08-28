@@ -96,7 +96,6 @@ body{font-family:'Prompt',sans-serif;background:linear-gradient(135deg, var(--bg
 </div>
 
 <script>
-// 📌 ใส่ Web App URL ของ Google Apps Script ที่คุณ Deploy ไว้ตรงนี้
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyHPz7y01sjBTy3bwGCRL89v-cRe7jen6ouu2txA5pVXklpkkHIsOZaeiHLoSfJKhLn/exec";
 
 window.onload = function() {
@@ -110,7 +109,7 @@ async function loadAnnouncement() {
     let res = await fetch(`${WEB_APP_URL}?action=announcement`);
     let json = await res.json();
     if (json.success && json.data) {
-      document.getElementById("announceTextinnerText = json.data; // แก้ไขเป็น innerText ตามปกติ
+      document.getElementById("announceText").innerText = json.data; // แก้ไขจุดที่ผิดพลาดตรงนี้เรียบร้อย
       document.getElementById("announceBox").style.display = "block";
     }
   } catch (e) { console.error(e); }
