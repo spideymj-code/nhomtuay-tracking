@@ -11,12 +11,12 @@
 
 /* --- 🎨 ดีไซน์โทนสีและตัวแปรหลัก (Design Tokens) --- */
 :root {
-  --primary-color: #ff5c93;       
-  --primary-hover: #ff3378;       
+  --primary-color: #ff5c93;        
+  --primary-hover: #ff3378;        
   --primary-light: #fff0f5;
-  --bg-gradient-start: #fff5f8;       
-  --bg-gradient-end: #f0f4ff;       
-  --text-main: #2d3748;           
+  --bg-gradient-start: #fff5f8;        
+  --bg-gradient-end: #f0f4ff;        
+  --text-main: #2d3748;            
   --text-muted: #718096;
   --border-color: #e2e8f0;
   --card-bg: #ffffff;
@@ -117,6 +117,7 @@ body {
   transition: all 0.25s ease;
   background: #fcfdfe;
   color: var(--text-main);
+  min-width: 0;
 }
 
 .search input:focus {
@@ -127,6 +128,7 @@ body {
 
 .search button {
   width: 130px;
+  flex-shrink: 0;
   border: none;
   background: var(--primary-color);
   color: white;
@@ -501,8 +503,6 @@ body {
   body { padding: 16px 10px; }
   .search-card, .batch-section, .footer-section { padding: 24px 18px; }
   .order { font-size: 18px; }
-  .search { flex-direction: column; }
-  .search button { width: 100%; height: 50px; }
 }
 
 </style>
@@ -758,10 +758,13 @@ function showData(data) {
   }
   timeline += '</div>';
 
-  let products = data.order.split(",");
+  let rawOrder = data.order ? data.order.replace(/\r\n/g, '\n').replace(/\r/g, '\n') : "";
+  let products = rawOrder.split("\n");
   let list = "";
   products.forEach(function(p) {
-    list += "<li>" + p.trim() + "</li>";
+    if (p.trim() !== "") {
+      list += "<li>" + p.trim() + "</li>";
+    }
   });
 
   let trackingHtml = "-";
