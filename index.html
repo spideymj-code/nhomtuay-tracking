@@ -236,21 +236,17 @@ body {
   font-weight: 600;
 }
 
-.box ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.box li {
+/* ปรับกล่องข้อความภายในให้รวมอยู่ในกล่องสีขาวชิ้นเดียวและเว้นบรรทัด */
+.product-content {
   font-size: 14px;
   background: #ffffff;
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-radius: 10px;
   border: 1px solid var(--border-color);
   color: var(--text-main);
   font-weight: 500;
+  line-height: 1.8;
+  word-break: break-word;
 }
 
 .info {
@@ -644,7 +640,7 @@ async function search() {
   let tracking = document.getElementById("tracking").value.trim();
 
   if(tracking === "") {
-    alert("กรุณากรอก Tracking Number");
+    alert("กรุณากรอกเลขที่คำสั่งซื้อ");
     return;
   }
 
@@ -759,13 +755,7 @@ function showData(data) {
   timeline += '</div>';
 
   let rawOrder = data.order ? data.order.replace(/\r\n/g, '\n').replace(/\r/g, '\n') : "";
-  let products = rawOrder.split("\n");
-  let list = "";
-  products.forEach(function(p) {
-    if (p.trim() !== "") {
-      list += "<li>" + p.trim() + "</li>";
-    }
-  });
+  let formattedOrder = rawOrder.replace(/\n/g, '<br>');
 
   let trackingHtml = "-";
   if (data.tracking && data.tracking.toString().trim() !== "" && data.tracking.toString().trim() !== "-") {
@@ -797,7 +787,7 @@ function showData(data) {
           </svg>
           รายการสินค้าในคำสั่งซื้อนี้
         </h3>
-        <ul>${list}</ul>
+        <div class="product-content">${formattedOrder}</div>
       </div>
       <div class="info">
         <div style="margin-bottom:4px;"><b>✈️ รอบส่งออก :</b> ${data.batch || "-"}</div>
@@ -813,3 +803,4 @@ function showData(data) {
 </script>
 </body>
 </html>
+ 
