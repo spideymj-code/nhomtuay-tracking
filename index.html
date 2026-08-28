@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* --- 🎨 ส่วนตั้งค่าโทนสีของร้าน --- */
 :root {
   --primary-color: #ff6496;       
   --primary-hover: #ff4580;       
@@ -51,48 +50,56 @@ body{font-family:'Prompt',sans-serif;background:linear-gradient(135deg, var(--bg
 .batch-table th {background-color: var(--accent-badge);color: var(--primary-hover);padding: 14px 18px;}
 .batch-table td {padding: 16px 18px;border-bottom: 1px solid #f7f8fa;}
 .batch-badge {background: #eef3ff;color: #4d7cff;padding: 5px 14px;border-radius: 20px;font-size: 12px;font-weight: 600;}
-.shop-policy {background: #fafbfe;padding: 20px;border-radius: 16px;font-size: 12px;color: #666;line-height: 1.8;margin-top:15px;}
+.shop-policy {background: #fafbfe;padding: 20px;border-radius: 16px;font-size: 13px;color: #666;line-height: 1.8;margin-top:15px;}
 </style>
 </head>
 <body>
 <div class="container">
-<div class="search-card">
-<img src="https://drive.google.com/thumbnail?id=1SjUczMQQtUKvBlK_0h5I5bFKZHSA7KV_&sz=w1200" alt="Shop Banner" class="banner-img">
-<div id="announceBox" class="announce-box">
-  <div class="announce-title">📢 ประกาศจากทางร้าน:</div>
-  <div id="announceText">กำลังโหลดประกาศ...</div>
-</div>
-<div class="title">📦 ระบบเช็คสถานะคำสั่งซื้อ</div>
-<div class="search">
-  <input id="tracking" placeholder="กรอกเลขที่คำสั่งซื้อ">
-  <button onclick="search()">ค้นหา</button>
-</div>
-<div id="historyContainer" class="history-container">
-  <span>ค้นหาล่าสุด:</span>
-  <div id="historyList" style="display:inline-flex; gap:5px;"></div>
-</div>
-<div id="result"></div>
-</div>
-
-<div class="batch-section">
-  <div class="batch-title">🚢 อัพเดตสถานะรอบขนส่งภาพรวม</div>
-  <div style="overflow-x:auto;">
-    <table class="batch-table">
-      <thead>
-        <tr>
-          <th>รอบส่งออก</th>
-          <th>สถานะ</th>
-          <th>วันที่ปิดรอบ</th>
-          <th>วันที่ถึงไทย</th>
-          <th>หมายเหตุ</th>
-        </tr>
-      </thead>
-      <tbody id="batchTableBody">
-        <tr><td colspan="5" style="text-align: center; color: #999; padding: 20px;">กำลังโหลดข้อมูลรอบขนส่ง...</td></tr>
-      </tbody>
-    </table>
+  <div class="search-card">
+    <img src="https://drive.google.com/thumbnail?id=1SjUczMQQtUKvBlK_0h5I5bFKZHSA7KV_&sz=w1200" alt="Shop Banner" class="banner-img">
+    <div id="announceBox" class="announce-box">
+      <div class="announce-title">📢 ประกาศจากทางร้าน:</div>
+      <div id="announceText">กำลังโหลดประกาศ...</div>
+    </div>
+    <div class="title">📦 ระบบเช็คสถานะคำสั่งซื้อ</div>
+    <div class="search">
+      <input id="tracking" placeholder="กรอกเลขที่คำสั่งซื้อ" onkeypress="handleKeyPress(event)">
+      <button onclick="search()">ค้นหา</button>
+    </div>
+    <div id="historyContainer" class="history-container">
+      <span>ค้นหาล่าสุด:</span>
+      <div id="historyList" style="display:inline-flex; gap:5px;"></div>
+    </div>
+    <div id="result"></div>
   </div>
-</div>
+
+  <div class="batch-section">
+    <div class="batch-title">🚢 อัพเดตสถานะรอบขนส่งภาพรอบ</div>
+    <div style="overflow-x:auto;">
+      <table class="batch-table">
+        <thead>
+          <tr>
+            <th>รอบส่งออก</th>
+            <th>สถานะ</th>
+            <th>วันที่ปิดรอบ</th>
+            <th>วันที่ถึงไทย</th>
+            <th>หมายเหตุ</th>
+          </tr>
+        </thead>
+        <tbody id="batchTableBody">
+          <tr><td colspan="5" style="text-align: center; color: #999; padding: 20px;">กำลังโหลดข้อมูลรอบขนส่ง...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-section">
+    <div class="footer-title">📌 เงื่อนไขและนโยบายร้านค้า</div>
+    <div class="shop-policy">
+      • สินค้าพรีออเดอร์ นำเข้าจากต่างประเทศ รอสินค้าประมาณ 15-20 วันหลังวันปิดรอบ<br>
+      • เมื่อสถานะเปลี่ยนเป็น "จัดส่งแล้ว" ระบบจะแสดงเลขพัสดุของไปรษณีย์ไทย สามารถกดลิงก์เพื่อเช็คสถานะการ 
+    </div>
+  </div>
 </div>
 
 <script>
@@ -104,12 +111,18 @@ window.onload = function() {
   showSearchHistory(); 
 };
 
+function handleKeyPress(e) {
+  if (e.key === 'Enter') {
+    search();
+  }
+}
+
 async function loadAnnouncement() {
   try {
     let res = await fetch(`${WEB_APP_URL}?action=announcement`);
     let json = await res.json();
     if (json.success && json.data) {
-      document.getElementById("announceText").innerText = json.data; // แก้ไขจุดที่ผิดพลาดตรงนี้เรียบร้อย
+      document.getElementById("announceText").innerText = json.data;
       document.getElementById("announceBox").style.display = "block";
     }
   } catch (e) { console.error(e); }
