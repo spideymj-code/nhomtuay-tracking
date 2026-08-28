@@ -288,68 +288,82 @@ body {
   color: var(--primary-color);
 }
 
-/* --- Timeline สถานะพัสดุ --- */
-.timeline {
-  margin-top: 40px;
-  display: flex;
-  justify-content: space-between;
+/* --- 📱 ดีไซน์ Timeline แบบแนวตั้งใหม่ --- */
+.timeline-vertical {
+  margin-top: 35px;
   position: relative;
-  padding: 0 10px;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.timeline:before {
+.timeline-vertical::before {
   content: "";
   position: absolute;
-  top: 16px;
-  left: 36px;
-  right: 36px;
-  height: 3px;
+  top: 8px;
+  bottom: 8px;
+  left: 35px;
+  width: 3px;
   background: #e2e8f0;
   z-index: 0;
 }
 
-.step {
+.timeline-item {
   position: relative;
   z-index: 1;
-  width: 16%;
-  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
 }
 
-.circle {
-  width: 32px;
-  height: 32px;
+.timeline-circle {
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: #cbd5e0;
-  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: white;
+  flex-shrink: 0;
   transition: all 0.3s ease;
+  margin-top: 2px;
 }
 
-.done {
+.timeline-circle.done {
   background: #48bb78;
-  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.25);
+  box-shadow: 0 0 0 4px rgba(72, 187, 120, 0.15);
 }
 
-.active {
+.timeline-circle.active {
   background: var(--primary-color);
   transform: scale(1.15);
-  box-shadow: 0 0 16px rgba(255, 92, 147, 0.4);
+  box-shadow: 0 0 0 6px rgba(255, 92, 147, 0.2);
 }
 
-.label {
-  margin-top: 10px;
-  font-size: 11px;
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-label {
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-muted);
 }
 
-.active + .label, .done + .label {
+.timeline-item.is-active .timeline-label,
+.timeline-item.is-done .timeline-label {
   color: var(--text-main);
+}
+
+.timeline-subtext {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
 }
 
 .notfound {
@@ -478,9 +492,6 @@ body {
 @media(max-width: 700px) {
   body { padding: 16px 10px; }
   .search-card, .batch-section, .footer-section { padding: 24px 18px; }
-  .timeline { overflow-x: auto; padding-bottom: 16px; justify-content: flex-start; gap: 24px; }
-  .step { min-width: 90px; }
-  .timeline:before { left: 30px; right: 30px; }
   .order { font-size: 18px; }
   .search { flex-direction: column; }
   .search button { width: 100%; height: 50px; }
@@ -695,33 +706,49 @@ function showData(data) {
   };
 
   let current = stepMap[data.status] !== undefined ? stepMap[data.status] : 0;
-  let timeline = "";
+  let timeline = '<div class="timeline-vertical">';
 
   for (let i = 0; i < status.length; i++) {
-    let cls = "circle";
+    let circleCls = "timeline-circle";
+    let itemCls = "timeline-item";
     let icon = "";
+    let subText = "";
 
     if (i === 5) {
+      icon = "🏠";
       if (current === 5) {
-        cls += " done";
-        icon = "🏠";
+        circleCls += " done";
+        itemCls += " is-done";
+        subText = "จัดส่งเรียบร้อยแล้ว";
       } else {
-        icon = "🏠";
+        subText = "กำลังรอจัดส่งออก";
       }
-    } else if (i <= current) {
-      cls += " done";
+    } else if (i < current) {
+      circleCls += " done";
+      itemCls += " is-done";
       icon = "✓";
+      subText = "ดำเนินการเรียบร้อย";
+    } else if (i === current) {
+      circleCls += " active";
+      itemCls += " is-active";
+      icon = i + 1;
+      subText = "📍 สถานะปัจจุบันของคุณ";
     } else {
       icon = i + 1;
+      subText = "รอดำเนินการ";
     }
 
     timeline += `
-      <div class="step">
-        <div class="${cls}">${icon}</div>
-        <div class="label">${status[i]}</div>
+      <div class="${itemCls}">
+        <div class="${circleCls}">${icon}</div>
+        <div class="timeline-content">
+          <div class="timeline-label">${status[i]}</div>
+          <div class="timeline-subtext">${subText}</div>
+        </div>
       </div>
     `;
   }
+  timeline += '</div>';
 
   let products = data.order.split(",");
   let list = "";
@@ -767,7 +794,7 @@ function showData(data) {
         <div style="margin-top:4px;"><b>📌 สถานะปัจจุบัน :</b> <span style="color:var(--primary-hover); font-weight:600;">${data.status}</span></div>
         <div style="margin-top:8px;"><b>🏠 ที่อยู่จัดส่ง :</b> ${addressHtml}</div>
       </div>
-      <div class="timeline">${timeline}</div>
+      ${timeline}
     </div>
   `;
 }
