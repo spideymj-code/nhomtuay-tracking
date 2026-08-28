@@ -9,485 +9,481 @@
 
 <style>
 
-/* --- 🎨 ส่วนตั้งค่าโทนสีของร้าน --- */
+/* --- 🎨 ดีไซน์โทนสีและตัวแปรหลัก (Design Tokens) --- */
 :root {
-  --primary-color: #ff6496;       
-  --primary-hover: #ff4580;       
-  --bg-gradient-1: #fdf8fa;       
-  --bg-gradient-2: #f3f6fd;       
-  --accent-badge: #ffeef4;        
-  --text-dark: #3a3a3a;           
+  --primary-color: #ff5c93;       
+  --primary-hover: #ff3378;       
+  --primary-light: #fff0f5;
+  --bg-gradient-start: #fff5f8;       
+  --bg-gradient-end: #f0f4ff;       
+  --text-main: #2d3748;           
+  --text-muted: #718096;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
+  --shadow-sm: 0 4px 20px rgba(255, 92, 147, 0.06);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.04);
 }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-font-family:'Prompt',sans-serif;
-background:linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
-padding:50px 15px;
-color: var(--text-dark);
+body {
+  font-family: 'Prompt', sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  padding: 40px 16px;
+  color: var(--text-main);
+  min-height: 100vh;
 }
 
-.container{
-max-width:750px; 
-margin:auto;
+.container {
+  max-width: 760px; 
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.search-card{
-background:#fff;
-padding:35px;
-border-radius:24px; 
-box-shadow:0 20px 50px rgba(255, 100, 150, 0.04), 0 10px 30px rgba(0,0,0,0.02);
-border: 1px solid rgba(255, 100, 150, 0.08);
+/* --- การ์ดหลักและส่วนค้นหา --- */
+.search-card {
+  background: var(--card-bg);
+  padding: 40px 32px;
+  border-radius: 28px; 
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 92, 147, 0.1);
 }
 
-/* สไตล์สำหรับรูปภาพ Banner */
 .banner-img {
-width: 100%;
-height: auto;
-border-radius: 18px;
-margin-bottom: 30px;
-display: block;
-object-fit: cover;
-box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  margin-bottom: 28px;
+  display: block;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
-/* สไตล์กล่องประกาศ */
+/* --- กล่องประกาศ --- */
 .announce-box {
-background: #fff6f9;
-border: 1px dashed var(--primary-color);
-padding: 18px 22px;
-border-radius: 16px;
-margin-bottom: 30px;
-display: none; 
-line-height: 1.6;
-box-shadow: inset 0 2px 4px rgba(255,100,150,0.02);
+  background: var(--primary-light);
+  border: 1px dashed var(--primary-color);
+  padding: 20px 24px;
+  border-radius: 18px;
+  margin-bottom: 28px;
+  display: none; 
+  line-height: 1.6;
 }
 
 .announce-title {
-font-size: 15px !important;
-font-weight: 700;
-margin-bottom: 5px;
-display: flex;
-align-items: center;
-gap: 8px;
-color: var(--primary-hover);
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-hover);
 }
 
 #announceText {
-font-size: 15px !important;
-color: var(--primary-hover);
+  font-size: 14px;
+  color: #555;
 }
 
-.announce-title, #announceText {
--webkit-text-size-adjust: 100%;
-text-size-adjust: 100%;
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+  color: var(--text-main);
+  letter-spacing: 0.3px;
 }
 
-.title{
-font-size:26px;
-font-weight:700;
-margin-bottom:20px;
-text-align: center;
-letter-spacing: 0.5px;
+/* --- ฟอร์มค้นหา --- */
+.search {
+  display: flex;
+  gap: 12px;
 }
 
-/* 🔄 โครงสร้างและขนาดช่องค้นหาเวอร์ชันแรกเริ่มคงที่ทุกหน้าจอ */
-.search{
-display:flex;
-gap:12px;
+.search input {
+  flex: 1;
+  height: 56px;
+  border-radius: 16px;
+  border: 2px solid var(--border-color);
+  padding: 0 20px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.25s ease;
+  background: #fcfdfe;
+  color: var(--text-main);
 }
 
-.search input{
-flex:1;
-height:55px;
-border-radius:16px;
-border:2px solid #eef0f5;
-padding:0 22px;
-font-size:16px;
-outline:none;
-transition:.3s;
-background: #fafbfe;
+.search input:focus {
+  border-color: var(--primary-color);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255, 92, 147, 0.12);
 }
 
-.search input:focus{
-border-color: var(--primary-color);
-background: #fff;
-box-shadow: 0 0 0 4px rgba(255, 100, 150, 0.1);
+.search button {
+  width: 130px;
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(255, 92, 147, 0.3);
 }
 
-.search button{
-width:130px;
-border:none;
-background: var(--primary-color);
-color:white;
-font-size:16px;
-font-weight: 600;
-border-radius:16px;
-cursor:pointer;
-transition:.3s transform, .3s background-color;
-box-shadow: 0 4px 12px rgba(255, 100, 150, 0.2);
+.search button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(255, 92, 147, 0.4);
 }
 
-.search button:hover{
-background: var(--primary-hover);
-transform: translateY(-2px);
-}
-
-.search button:active{
-transform: translateY(0);
+.search button:active {
+  transform: translateY(0);
 }
 
 /* ประวัติการค้นหาล่าสุด */
 .history-container {
-margin-top: 15px;
-font-size: 13px;
-color: #888;
-display: none;
-align-items: center;
-gap: 8px;
-flex-wrap: wrap;
-padding-left: 5px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+  display: none;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-left: 4px;
 }
 
 .history-tag {
-background: #f0f2f7;
-padding: 4px 12px;
-border-radius: 20px;
-cursor: pointer;
-transition: 0.2s;
-color: #555;
-font-weight: 500;
+  background: #edf2f7;
+  padding: 5px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #4a5568;
+  font-weight: 500;
 }
 
 .history-tag:hover {
-background: var(--accent-badge);
-color: var(--primary-hover);
+  background: var(--primary-light);
+  color: var(--primary-hover);
 }
 
-#result{
-margin-top:35px;
+#result {
+  margin-top: 32px;
 }
 
 /* --- กล่องผลลัพธ์การค้นหา --- */
-.card{
-background:#fff;
-padding:30px;
-border-radius:24px;
-border: 1px solid #f0f2f7;
-box-shadow:0 15px 35px rgba(0,0,0,.03);
-animation:fade .4s ease-out;
+.card {
+  background: var(--card-bg);
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fade{
-from{opacity:0; transform:translateY(15px);}
-to{opacity:1; transform:none;}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
 }
 
-.order{
-font-size:22px;
-font-weight:700;
-margin-bottom:8px;
-color: var(--text-dark);
+.order {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-main);
 }
 
-.badge{
-display:inline-block;
-background: var(--accent-badge);
-color: var(--primary-hover);
-padding:6px 16px;
-border-radius:30px;
-font-weight:600;
-font-size: 13px;
-margin-bottom:20px;
+.badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary-hover);
+  padding: 5px 14px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 20px;
 }
 
-/* ตกแต่งกล่องรายการสินค้าแบบมินิมอลแยกชิ้น */
-.box{
-background:#f8fafc;
-padding:22px;
-border-left:4px solid var(--primary-color);
-border-radius:16px;
-margin-top:15px;
-border-top: 1px solid #f1f5f9;
-border-right: 1px solid #f1f5f9;
-border-bottom: 1px solid #f1f5f9;
+/* กล่องรายการสินค้า */
+.box {
+  background: #f8fafc;
+  padding: 20px;
+  border-left: 4px solid var(--primary-color);
+  border-radius: 16px;
+  margin-top: 16px;
+  border-top: 1px solid #edf2f7;
+  border-right: 1px solid #edf2f7;
+  border-bottom: 1px solid #edf2f7;
 }
 
-.box h3{
-margin-bottom:14px;
-font-size: 15px;
-color: #475569;
-display: flex;
-align-items: center;
-gap: 6px;
+.box h3 {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
 }
 
-.box ul{
-list-style: none;
-padding-left:0;
-display: flex;
-flex-direction: column;
-gap: 8px;
+.box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.box li{
-font-size: 14px;
-background: #ffffff;
-padding: 10px 14px;
-border-radius: 10px;
-border: 1px solid #e2e8f0;
-color: #334155;
-font-weight: 500;
+.box li {
+  font-size: 14px;
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  font-weight: 500;
 }
 
-.info{
-margin-top:25px;
-line-height:2.0;
-padding-left: 5px;
-font-size: 15px;
+.info {
+  margin-top: 24px;
+  line-height: 2.2;
+  font-size: 14px;
 }
 
 .info b {
-color: #64748b;
-font-weight: 500;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .address-box {
-background: #fafbfe;
-border: 1px dashed #e2e8f0;
-padding: 12px 16px;
-border-radius: 12px;
-margin-top: 6px;
-line-height: 1.6;
-font-size: 14px;
-color: #475569;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-top: 6px;
+  line-height: 1.6;
+  font-size: 14px;
+  color: var(--text-main);
 }
 
-/* ลิงก์ตรงเช็คไปรษณีย์ไทย */
 .btn-track-link {
-display: inline-flex;
-align-items: center;
-gap: 4px;
-color: #ff4580;
-text-decoration: underline;
-font-weight: 600;
-font-size: 13px;
-margin-top: 2px;
-transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--primary-hover);
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 2px;
 }
 
 .btn-track-link:hover {
-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
-/* Timeline */
-.timeline{
-margin-top:45px;
-display:flex;
-justify-content:space-between;
-position:relative;
-padding: 0 10px;
+/* --- Timeline สถานะพัสดุ --- */
+.timeline {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 0 10px;
 }
 
-.timeline:before{
-content:"";
-position:absolute;
-top:16px;
-left:40px;
-right:40px;
-height:4px;
-background:#edf0f5;
-z-index:0;
+.timeline:before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 36px;
+  right: 36px;
+  height: 3px;
+  background: #e2e8f0;
+  z-index: 0;
 }
 
-.step{
-position:relative;
-z-index:1;
-width:16%;
-text-align:center;
+.step {
+  position: relative;
+  z-index: 1;
+  width: 16%;
+  text-align: center;
 }
 
-.circle{
-width:34px;
-height:34px;
-border-radius:50%;
-background:#e4e8f0;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:15px;
-font-weight:bold;
-color:white;
-transition: 0.3s;
+.circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #cbd5e0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
 }
 
-.done{
-background:#2ecc71;
-box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2);
+.done {
+  background: #48bb78;
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.25);
 }
 
-.active{
-background: var(--primary-color);
-transform:scale(1.2);
-box-shadow:0 0 15px rgba(255, 100, 150, 0.4);
+.active {
+  background: var(--primary-color);
+  transform: scale(1.15);
+  box-shadow: 0 0 16px rgba(255, 92, 147, 0.4);
 }
 
-.label{
-margin-top:12px;
-font-size:12px;
-font-weight:600;
-color: #94a3b8;
+.label {
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 .active + .label, .done + .label {
-color: var(--text-dark);
+  color: var(--text-main);
 }
 
-.notfound{
-background:#fff;
-padding:40px;
-border-radius:22px;
-text-align:center;
-font-size:18px;
-color:#999;
-border: 2px dashed #eef0f5;
+.notfound {
+  background: var(--card-bg);
+  padding: 36px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-muted);
+  border: 2px dashed var(--border-color);
 }
 
 /* --- ตารางรอบขนส่งภาพรวม --- */
 .batch-section {
-margin-top: 35px;
-background: #fff;
-padding: 30px;
-border-radius: 24px;
-box-shadow:0 15px 40px rgba(0,0,0,.02);
-border: 1px solid #f0f2f7;
+  background: var(--card-bg);
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .batch-title {
-font-size: 18px;
-font-weight: 700;
-margin-bottom: 20px;
-color: #333;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--text-main);
 }
 
 .batch-table-container {
-width: 100%;
-overflow-x: auto;
+  width: 100%;
+  overflow-x: auto;
 }
 
 .batch-table {
-width: 100%;
-border-collapse: collapse;
-text-align: left;
-font-size: 14px;
-min-width: 500px;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+  min-width: 520px;
 }
 
 .batch-table th {
-background-color: var(--accent-badge);
-color: var(--primary-hover);
-font-weight: 600;
-padding: 14px 18px;
-border-radius: 8px;
+  background-color: var(--primary-light);
+  color: var(--primary-hover);
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 8px;
 }
 
 .batch-table td {
-padding: 16px 18px;
-border-bottom: 1px solid #f7f8fa;
-color: #555;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f7fafc;
+  color: #4a5568;
 }
 
 .batch-badge {
-display: inline-block;
-background: #eef3ff;
-color: #4d7cff;
-padding: 5px 14px;
-border-radius: 20px;
-font-weight: 600;
-font-size: 12px;
+  display: inline-block;
+  background: #ebf8ff;
+  color: #3182ce;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
 }
 
-/* --- กล่องติดต่อและชี้แจงระยะเวลาจัดส่ง --- */
+/* --- ส่วน Footer และนโยบายร้าน --- */
 .footer-section {
-margin-top: 35px;
-background: #fff;
-padding: 30px;
-border-radius: 24px;
-box-shadow:0 15px 40px rgba(0,0,0,.02);
-border: 1px solid #f0f2f7;
-text-align: center;
+  background: var(--card-bg);
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  text-align: center;
 }
 
 .footer-title {
-font-size: 16px;
-font-weight: 700;
-margin-bottom: 18px;
-color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-main);
 }
 
 .contact-buttons {
-display: flex;
-justify-content: center;
-gap: 15px;
-margin-bottom: 25px;
-flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
 .btn-contact {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-padding: 12px 28px;
-border-radius: 16px;
-text-decoration: none;
-font-weight: 600;
-font-size: 14px;
-transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.25s ease;
 }
 
 .btn-x {
-background: #000000;
-color: white;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-border: 1px solid #111;
+  background: #1a202c;
+  color: white;
+  box-shadow: 0 4px 12px rgba(26, 32, 44, 0.2);
 }
 
 .btn-x:hover {
-background: #222222;
-transform: translateY(-2px);
+  background: #2d3748;
+  transform: translateY(-1px);
 }
 
 .shop-policy {
-background: #fafbfe;
-padding: 20px;
-border-radius: 16px;
-font-size: 12px; 
-color: #666;
-text-align: left;
-line-height: 1.8;
-border: 1px solid #f0f2f7;
--webkit-text-size-adjust: 100%; 
-text-size-adjust: 100%;
+  background: #f8fafc;
+  padding: 18px 20px;
+  border-radius: 14px;
+  font-size: 12px; 
+  color: var(--text-muted);
+  text-align: left;
+  line-height: 1.8;
+  border: 1px solid var(--border-color);
 }
 
-@media(max-width:700px){
-.timeline{ overflow-x:auto; padding-bottom:20px; }
-.step{ min-width:105px; }
-.timeline:before{ left:50px; right:50px; }
-.order{ font-size:20px; }
-body { padding: 20px 10px; }
-.search-card, .batch-section, .footer-section { padding: 20px; }
-
-.shop-policy {
-font-size: 11px !important;
-padding: 15px;
-}
+/* --- Responsive สำหรับหน้าจอ มือถือ --- */
+@media(max-width: 700px) {
+  body { padding: 16px 10px; }
+  .search-card, .batch-section, .footer-section { padding: 24px 18px; }
+  .timeline { overflow-x: auto; padding-bottom: 16px; justify-content: flex-start; gap: 24px; }
+  .step { min-width: 90px; }
+  .timeline:before { left: 30px; right: 30px; }
+  .order { font-size: 18px; }
+  .search { flex-direction: column; }
+  .search button { width: 100%; height: 50px; }
 }
 
 </style>
@@ -540,7 +536,7 @@ padding: 15px;
       </thead>
       <tbody id="batchTableBody">
         <tr>
-          <td colspan="5" style="text-align: center; color: #999; padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td>
+          <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td>
         </tr>
       </tbody>
     </table>
@@ -604,7 +600,7 @@ async function loadShippingBatches() {
     let tbody = document.getElementById("batchTableBody");
     
     if (!json.success || !json.data || json.data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #999; padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
       return;
     }
     
@@ -621,7 +617,7 @@ async function loadShippingBatches() {
     tbody.innerHTML = html;
   } catch (err) {
     console.error(err);
-    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: #999; padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
+    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
   }
 }
 
@@ -635,7 +631,7 @@ async function search() {
 
   saveSearchHistory(tracking);
 
-  document.getElementById("result").innerHTML = `<div style="text-align:center; padding:30px; color:#888;">🔍 กำลังค้นหาข้อมูลคำสั่งซื้อ...</div>`;
+  document.getElementById("result").innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted);">🔍 กำลังค้นหาข้อมูลคำสั่งซื้อ...</div>`;
 
   try {
     let res = await fetch(`${WEB_APP_URL}?action=search&trackingNo=${encodeURIComponent(tracking)}`);
@@ -738,7 +734,7 @@ function showData(data) {
     let cleanTracking = data.tracking.toString().replace(/<[^>]*>/g, '').trim();
 
     trackingHtml = `
-      <span style="font-size:16px; font-weight:700; color:#334155;">${cleanTracking}</span>
+      <span style="font-size:16px; font-weight:700; color:var(--text-main);">${cleanTracking}</span>
       <br>
       <a href="https://track.thailandpost.co.th/?trackNumber=${cleanTracking}" target="_blank" class="btn-track-link">
         🔗 คลิกเพื่อไปหน้าเช็คพัสดุ (ไปรษณีย์ไทย EMS)
@@ -747,8 +743,8 @@ function showData(data) {
   }
 
   let addressHtml = (data.address && data.address !== "-")
-    ? `<div class="address-box"> ${data.address}</div>`
-    : `<div class="address-box" style="color:#94a3b8; font-style:italic;">⚠️ ไม่พบข้อมูลที่อยู่จัดส่งจัดเก็บในระบบชั่วคราว</div>`;
+    ? `<div class="address-box">${data.address}</div>`
+    : `<div class="address-box" style="color:var(--text-muted); font-style:italic;">⚠️ ไม่พบข้อมูลที่อยู่จัดส่งจัดเก็บในระบบชั่วคราว</div>`;
 
   document.getElementById("result").innerHTML = `
     <div class="card">
@@ -766,10 +762,10 @@ function showData(data) {
         <ul>${list}</ul>
       </div>
       <div class="info">
-        <div style="margin-bottom:5px;"><b>✈️ รอบส่งออก :</b> ${data.batch || "-"}</div>
+        <div style="margin-bottom:4px;"><b>✈️ รอบส่งออก :</b> ${data.batch || "-"}</div>
         <div><b>🚚 เลขพัสดุ :</b> ${trackingHtml}</div>
-        <div style="margin-top:5px;"><b>📌 สถานะปัจจุบัน :</b> <span style="color:var(--primary-hover); font-weight:600;">${data.status}</span></div>
-        <div style="margin-top:10px;"><b>🏠 ที่อยู่จัดส่ง :</b> ${addressHtml}</div>
+        <div style="margin-top:4px;"><b>📌 สถานะปัจจุบัน :</b> <span style="color:var(--primary-hover); font-weight:600;">${data.status}</span></div>
+        <div style="margin-top:8px;"><b>🏠 ที่อยู่จัดส่ง :</b> ${addressHtml}</div>
       </div>
       <div class="timeline">${timeline}</div>
     </div>
