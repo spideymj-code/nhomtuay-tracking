@@ -689,7 +689,7 @@ function showData(data) {
 
   let status = [
     "รับออเดอร์",
-    (data.status === "หิ้วแล้ว" || data.status === "กดเว็บแล้ว") ? data.status : "หิ้วแล้ว",
+    (data.status === "กดเว็บแล้ว" || data.status === "หิ้วแล้ว") ? data.status : "กดเว็บแล้ว",
     (data.status === "ของถึงบ้านญี่ปุ่น" || data.status === "ของถึงโกดังญี่ปุ่น") ? data.status : "ของถึงบ้านญี่ปุ่น",
     "ของถึงโกดังไทย",
     "รอร้านจัดส่ง",
@@ -698,7 +698,7 @@ function showData(data) {
 
   const stepMap = {
     "รับออเดอร์": 0,
-    "หิ้วแล้ว": 1, "กดเว็บแล้ว": 1,
+    "กดเว็บแล้ว": 1, "หิ้วแล้ว": 1,
     "ของถึงบ้านญี่ปุ่น": 2, "ของถึงโกดังญี่ปุ่น": 2,
     "ของถึงโกดังไทย": 3,
     "รอร้านจัดส่ง": 4,
@@ -719,31 +719,37 @@ function showData(data) {
       if (current === 5) {
         circleCls += " done";
         itemCls += " is-done";
-        subText = "จัดส่งเรียบร้อยแล้ว";
-      } else {
-        subText = "กำลังรอจัดส่งออก";
       }
     } else if (i < current) {
       circleCls += " done";
       itemCls += " is-done";
       icon = "✓";
-      subText = "ดำเนินการเรียบร้อย";
     } else if (i === current) {
       circleCls += " active";
       itemCls += " is-active";
       icon = i + 1;
-      subText = "📍 สถานะปัจจุบันของคุณ";
+      if (i === 0) {
+        subText = "ดำเนินการเรียบร้อย";
+      } else if (i === 4) {
+        subText = "กำลังรอจัดส่งออก";
+      }
     } else {
       icon = i + 1;
-      subText = "รอดำเนินการ";
+      if (i === 0) {
+        subText = "ดำเนินการเรียบร้อย";
+      } else if (i === 4) {
+        subText = "กำลังรอจัดส่งออก";
+      }
     }
+
+    let subTextHtml = subText ? `<div class="timeline-subtext">${subText}</div>` : "";
 
     timeline += `
       <div class="${itemCls}">
         <div class="${circleCls}">${icon}</div>
         <div class="timeline-content">
           <div class="timeline-label">${status[i]}</div>
-          <div class="timeline-subtext">${subText}</div>
+          ${subTextHtml}
         </div>
       </div>
     `;
