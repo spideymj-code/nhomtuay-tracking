@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* --- 🎨 ส่วนตั้งค่าโทนสีของร้าน --- */
+:root {
+  --primary-color: #ff6496;       
+  --primary-hover: #ff4580;       
+  --bg-gradient-1: #fdf8fa;       
+  --bg-gradient-2: #f3f6fd;       
+  --accent-badge: #ffeef4;        
+  --text-dark: #3a3a3a;           
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Prompt',sans-serif;background:linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));padding:50px 15px;color: var(--text-dark);}
+.container{max-width:750px;margin:auto;}
+.search-card{background:#fff;padding:35px;border-radius:24px;box-shadow:0 20px 50px rgba(255, 100, 150, 0.04), 0 10px 30px rgba(0,0,0,0.02);border: 1px solid rgba(255, 100, 150, 0.08);}
+.banner-img {width: 100%;height: auto;border-radius: 18px;margin-bottom: 30px;display: block;object-fit: cover;box-shadow: 0 8px 20px rgba(0,0,0,0.05);}
+.announce-box {background: #fff6f9;border: 1px dashed var(--primary-color);padding: 18px 22px;border-radius: 16px;margin-bottom: 30px;display: none;line-height: 1.6;}
+.announce-title {font-size: 15px !important;font-weight: 700;margin-bottom: 5px;color: var(--primary-hover);}
+#announceText {font-size: 15px !important;color: var(--primary-hover);}
+.title{font-size:26px;font-weight:700;margin-bottom:20px;text-align: center;}
+.search{display:flex;gap:12px;}
+.search input{flex:1;height:55px;border-radius:16px;border:2px solid #eef0f5;padding:0 22px;font-size:16px;outline:none;background: #fafbfe;}
+.search button{width:130px;border:none;background: var(--primary-color);color:white;font-size:16px;font-weight: 600;border-radius:16px;cursor:pointer;}
+.history-container {margin-top: 15px;font-size: 13px;color: #888;display: none;align-items: center;gap: 8px;}
+.history-tag {background: #f0f2f7;padding: 4px 12px;border-radius: 20px;cursor: pointer;color: #555;font-weight: 500;}
+#result{margin-top:35px;}
+.card{background:#fff;padding:30px;border-radius:24px;border: 1px solid #f0f2f7;box-shadow:0 15px 35px rgba(0,0,0,.03);}
+.order{font-size:22px;font-weight:700;margin-bottom:8px;}
+.badge{display:inline-block;background: var(--accent-badge);color: var(--primary-hover);padding:6px 16px;border-radius:30px;font-weight:600;font-size: 13px;margin-bottom:20px;}
+.box{background:#f8fafc;padding:22px;border-left:4px solid var(--primary-color);border-radius:16px;margin-top:15px;}
+.box ul{list-style: none;padding-left:0;display: flex;flex-direction: column;gap: 8px;}
+.box li{font-size: 14px;background: #ffffff;padding: 10px 14px;border-radius: 10px;border: 1px solid #e2e8f0;color: #334155;}
+.info{margin-top:25px;line-height:2.0;font-size: 15px;}
+.address-box {background: #fafbfe;border: 1px dashed #e2e8f0;padding: 12px 16px;border-radius: 12px;margin-top: 6px;font-size: 14px;color: #475569;}
+.btn-track-link {color: #ff4580;text-decoration: underline;font-weight: 600;font-size: 13px;}
+.timeline{margin-top:45px;display:flex;justify-content:space-between;position:relative;padding: 0 10px;}
+.timeline:before{content:"";position:absolute;top:16px;left:40px;right:40px;height:4px;background:#edf0f5;z-index:0;}
+.step{position:relative;z-index:1;width:16%;text-align:center;}
+.circle{width:34px;height:34px;border-radius:50%;background:#e4e8f0;margin:auto;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:bold;color:white;}
+.done{background:#2ecc71;}
+.active{background: var(--primary-color);transform:scale(1.2);}
+.label{margin-top:12px;font-size:12px;font-weight:600;color: #94a3b8;}
+.batch-section, .footer-section {margin-top: 35px;background: #fff;padding: 30px;border-radius: 24px;border: 1px solid #f0f2f7;}
+.batch-title, .footer-title {font-size: 18px;font-weight: 700;margin-bottom: 20px;}
+.batch-table {width: 100%;border-collapse: collapse;text-align: left;font-size: 14px;}
+.batch-table th {background-color: var(--accent-badge);color: var(--primary-hover);padding: 14px 18px;}
+.batch-table td {padding: 16px 18px;border-bottom: 1px solid #f7f8fa;}
+.batch-badge {background: #eef3ff;color: #4d7cff;padding: 5px 14px;border-radius: 20px;font-size: 12px;font-weight: 600;}
+.shop-policy {background: #fafbfe;padding: 20px;border-radius: 16px;font-size: 12px;color: #666;line-height: 1.8;margin-top:15px;}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="search-card">
+<img src="https://drive.google.com/thumbnail?id=1SjUczMQQtUKvBlK_0h5I5bFKZHSA7KV_&sz=w1200" alt="Shop Banner" class="banner-img">
+<div id="announceBox" class="announce-box">
+  <div class="announce-title">📢 ประกาศจากทางร้าน:</div>
+  <div id="announceText">กำลังโหลดประกาศ...</div>
+</div>
+<div class="title">📦 ระบบเช็คสถานะคำสั่งซื้อ</div>
+<div class="search">
+  <input id="tracking" placeholder="กรอกเลขที่คำสั่งซื้อ">
+  <button onclick="search()">ค้นหา</button>
+</div>
+<div id="historyContainer" class="history-container">
+  <span>ค้นหาล่าสุด:</span>
+  <div id="historyList" style="display:inline-flex; gap:5px;"></div>
+</div>
+<div id="result"></div>
+</div>
+
+<div class="batch-section">
+  <div class="batch-title">🚢 อัพเดตสถานะรอบขนส่งภาพรวม</div>
+  <div style="overflow-x:auto;">
+    <table class="batch-table">
+      <thead>
+        <tr>
+          <th>รอบส่งออก</th>
+          <th>สถานะ</th>
+          <th>วันที่ปิดรอบ</th>
+          <th>วันที่ถึงไทย</th>
+          <th>หมายเหตุ</th>
+        </tr>
+      </thead>
+      <tbody id="batchTableBody">
+        <tr><td colspan="5" style="text-align: center; color: #999; padding: 20px;">กำลังโหลดข้อมูลรอบขนส่ง...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<script>
+// 📌 ใส่ Web App URL ของ Google Apps Script ที่คุณ Deploy ไว้ตรงนี้
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyHPz7y01sjBTy3bwGCRL89v-cRe7jen6ouu2txA5pVXklpkkHIsOZaeiHLoSfJKhLn/exec";
+
+window.onload = function() {
+  loadAnnouncement();
+  loadShippingBatches();
+  showSearchHistory(); 
+};
+
+async function loadAnnouncement() {
+  try {
+    let res = await fetch(`${WEB_APP_URL}?action=announcement`);
+    let json = await res.json();
+    if (json.success && json.data) {
+      document.getElementById("announceTextinnerText = json.data; // แก้ไขเป็น innerText ตามปกติ
+      document.getElementById("announceBox").style.display = "block";
+    }
+  } catch (e) { console.error(e); }
+}
+
+async function loadShippingBatches() {
+  try {
+    let res = await fetch(`${WEB_APP_URL}?action=shippingBatches`);
+    let json = await res.json();
+    let tbody = document.getElementById("batchTableBody");
+    
+    if (!json.success || !json.data || json.data.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #999; padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่ง</td></tr>`;
+      return;
+    }
+    
+    let html = "";
+    json.data.forEach(function(item) {
+      html += `<tr>
+        <td><strong>${item.batchName || "-"}</strong></td>
+        <td><span class="batch-badge">${item.status || "-"}</span></td>
+        <td>${item.closeDate || "-"}</td>
+        <td>${item.warehouseDate || "-"}</td>
+        <td>${item.note || "-"}</td>
+      </tr>`;
+    });
+    tbody.innerHTML = html;
+  } catch (e) {
+    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: red; padding: 20px;">โหลดข้อมูลล้มเหลว</td></tr>`;
+  }
+}
+
+async function search() {
+  let tracking = document.getElementById("tracking").value.trim();
+  if (tracking === "") {
+    alert("กรุณากรอก Tracking Number");
+    return;
+  }
+  saveSearchHistory(tracking);
+  document.getElementById("result").innerHTML = `<div style="text-align:center; padding:30px; color:#888;">🔍 กำลังค้นหาข้อมูลคำสั่งซื้อ...</div>`;
+
+  try {
+    let res = await fetch(`${WEB_APP_URL}?action=search&trackingNo=${encodeURIComponent(tracking)}`);
+    let json = await res.json();
+    if (json.success) {
+      showData(json.data);
+    } else {
+      alert(json.message || "เกิดข้อผิดพลาด");
+    }
+  } catch (e) {
+    alert("ไม่สามารถเชื่อมต่อระบบได้");
+  }
+}
+
+function saveSearchHistory(tracking) {
+  localStorage.setItem("lastSearch", tracking);
+  showSearchHistory();
+}
+
+function showSearchHistory() {
+  let lastSearch = localStorage.getItem("lastSearch");
+  if(lastSearch) {
+    document.getElementById("historyContainer").style.display = "flex";
+    document.getElementById("historyList").innerHTML = `<span class="history-tag" onclick="clickHistory('${lastSearch}')">${lastSearch}</span>`;
+  }
+}
+
+function clickHistory(value) {
+  document.getElementById("tracking").value = value;
+  search();
+}
+
+function showData(data) {
+  if (data == null) {
+    document.getElementById("result").innerHTML = `<div class="card" style="text-align:center; color:#999;">❌ ไม่พบข้อมูลเลขคำสั่งซื้อนี้ กรุณาตรวจสอบใหม่อีกครั้งค่ะ</div>`;
+    return;
+  }
+
+  let status = ["รับออเดอร์", "หิ้วแล้ว", "ของถึงบ้านญี่ปุ่น", "ของถึงโกดังไทย", "รอร้านจัดส่ง", "จัดส่งแล้ว"];
+  const stepMap = { "รับออเดอร์": 0, "หิ้วแล้ว": 1, "กดเว็บแล้ว": 1, "ของถึงบ้านญี่ปุ่น": 2, "ของถึงโกดังญี่ปุ่น": 2, "ของถึงโกดังไทย": 3, "รอร้านจัดส่ง": 4, "จัดส่งแล้ว": 5 };
+  let current = stepMap[data.status] !== undefined ? stepMap[data.status] : 0;
+  let timeline = "";
+
+  for (let i = 0; i < status.length; i++) {
+    let cls = "circle";
+    let icon = (i <= current) ? "✓" : (i + 1);
+    if (i <= current) cls += " done";
+    timeline += `<div class="step"><div class="${cls}">${icon}</div><div class="label">${status[i]}</div></div>`;
+  }
+
+  let products = data.order.split(",");
+  let list = "";
+  products.forEach(function(p) { list += "<li>" + p.trim() + "</li>"; });
+
+  let trackingHtml = data.tracking && data.tracking !== "-" ? `<span style="font-weight:700;">${data.tracking}</span><br><a href="https://track.thailandpost.co.th/?trackNumber=${data.tracking}" target="_blank" class="btn-track-link">🔗 ไปหน้าเช็คพัสดุ ปณ.ไทย</a>` : "-";
+  let addressHtml = data.address && data.address !== "-" ? `<div class="address-box">${data.address}</div>` : `<div class="address-box" style="color:#94a3b8; font-style:italic;">⚠️ ไม่พบข้อมูลที่อยู่จัดส่ง</div>`;
+
+  document.getElementById("result").innerHTML = `
+    <div class="card">
+      <div class="order">เลขที่คำสั่งซื้อ : ${data.orderid}</div>
+      <div class="badge">${data.account}</div>
+      <div class="box">
+        <h3>รายการสินค้าในคำสั่งซื้อนี้</h3>
+        <ul>${list}</ul>
+      </div>
+      <div class="info">
+        <div><b>✈️ รอบส่งออก :</b> ${data.batch || "-"}</div>
+        <div><b>🚚 เลขพัสดุ :</b> ${trackingHtml}</div>
+        <div><b>📌 สถานะปัจจุบัน :</b> <span style="color:var(--primary-hover); font-weight:600;">${data.status}</span></div>
+        <div><b>🏠 ที่อยู่จัดส่ง :</b> ${addressHtml}</div>
+      </div>
+      <div class="timeline">${timeline}</div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
