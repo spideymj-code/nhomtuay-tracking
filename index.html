@@ -288,24 +288,25 @@ body {
   color: var(--primary-color);
 }
 
-/* --- 📱 ดีไซน์ Timeline แบบแนวตั้งใหม่ --- */
+/* --- ✨ ดีไซน์ Timeline แนวตั้งใหม่ที่ดูพรีเมียมขึ้น --- */
 .timeline-vertical {
   margin-top: 35px;
   position: relative;
-  padding-left: 24px;
+  padding-left: 28px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
+/* เส้นเชื่อมระหว่างสถานะ */
 .timeline-vertical::before {
   content: "";
   position: absolute;
-  top: 8px;
-  bottom: 8px;
-  left: 35px;
+  top: 10px;
+  bottom: 10px;
+  left: 42px;
   width: 3px;
-  background: #e2e8f0;
+  background: #edf2f7;
   z-index: 0;
 }
 
@@ -314,39 +315,45 @@ body {
   z-index: 1;
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 18px;
 }
 
+/* วงกลมไอคอนหลัก */
 .timeline-circle {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: #cbd5e0;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   flex-shrink: 0;
   transition: all 0.3s ease;
-  margin-top: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
+/* สถานะที่ผ่านไปแล้ว (Done) */
 .timeline-circle.done {
-  background: #edf2f7;
-  border: 2px solid #48bb78;
-  box-shadow: 0 0 0 4px rgba(72, 187, 120, 0.15);
+  background: #f0fff4;
+  border-color: #48bb78;
+  color: #48bb78;
+  box-shadow: 0 0 0 4px rgba(72, 187, 120, 0.12);
 }
 
+/* สถานะปัจจุบัน (Active) */
 .timeline-circle.active {
   background: var(--primary-light);
-  border: 2px solid var(--primary-color);
+  border-color: var(--primary-color);
   transform: scale(1.15);
-  box-shadow: 0 0 0 6px rgba(255, 92, 147, 0.2);
+  box-shadow: 0 0 0 6px rgba(255, 92, 147, 0.15);
 }
 
 .timeline-content {
   display: flex;
   flex-direction: column;
+  padding-top: 3px;
 }
 
 .timeline-label {
@@ -364,7 +371,7 @@ body {
   font-size: 12px;
   color: var(--primary-hover);
   font-weight: 500;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .notfound {
@@ -706,8 +713,7 @@ function showData(data) {
     "จัดส่งแล้ว": 5
   };
 
-  // กำหนดไอคอนอิโมจิในแต่ละสเตป (0 ถึง 5)
-  const icons = ["🛒", "💻", "📦", "✈️", "⏳", "🏠"];
+  const icons = ["📋", "💻", "📬", "🏠", "📦", "🚚"];
 
   let current = stepMap[data.status] !== undefined ? stepMap[data.status] : 0;
   let timeline = '<div class="timeline-vertical">';
@@ -715,7 +721,7 @@ function showData(data) {
   for (let i = 0; i < status.length; i++) {
     let circleCls = "timeline-circle";
     let itemCls = "timeline-item";
-    let icon = icons[i]; // ดึงอิโมจิมาใช้
+    let icon = icons[i];
     let subText = "";
 
     if (i === 5) {
@@ -726,12 +732,11 @@ function showData(data) {
     } else if (i < current) {
       circleCls += " done";
       itemCls += " is-done";
-      icon = "✓"; // ถ้าผ่านไปแล้วเปลี่ยนเป็นเครื่องหมายถูก
+      icon = "✓";
     } else if (i === current) {
       circleCls += " active";
       itemCls += " is-active";
       
-      // แสดงซับเท็กซ์เฉพาะตอนที่อยู่ในสถานะนั้นๆ
       if (i === 0) {
         subText = "ดำเนินการเรียบร้อย";
       } else if (i === 4) {
