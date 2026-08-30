@@ -10,30 +10,30 @@
 
 <style>
 
-/* --- 🌸 โทนสีใหม่ตามภาพ (Pink, Pastel Purple, Cream Yellow, Soft Green) --- */
+/* --- 🌸 ปรับโทนสีตามภาพต้นฉบับ: ชมพู ฟ้า เหลือง เขียวพาสเทล --- */
 :root {
-  --primary: #9b6cb7;          /* สีม่วงอมชมพูเข้มสำหรับตัวอักษรและปุ่มหลัก */
-  --primary-dark: #7b4e95;     /* สีม่วงเข้มสำหรับ Hover */
-  --primary-light: #f7eefa;    /* สีม่วงอ่อนเจือชมพูสำหรับพื้นหลังไฮไลท์ */
+  --primary: #ff7bac;          /* สีชมพูหลักสดใส (จากตัวแมว/ป้าย) */
+  --primary-dark: #e05a8f;     /* สีชมพูเข้มสำหรับ Hover */
+  --primary-light: #fff0f5;    /* สีชมพูอ่อนพาสเทล */
 
-  --pink-accent: #ff9ecb;      /* สีชมพูพาสเทลสดใสจากป้าย/หมอน */
-  --pink-light: #fff0f6;       /* สีชมพูอ่อนละมุน */
+  --blue-accent: #89d4ed;      /* สีฟ้าพาสเทล (จากขอบกันสาด/ป้ายชื่อ) */
+  --blue-light: #eef8fc;       /* สีฟ้าอ่อนละมุน */
 
-  --purple-accent: #b89ccf;    /* สีม่วงพาสเทล */
-  --yellow-accent: #f7e68a;    /* สีเหลืองดาว/ครีม */
+  --yellow-accent: #ffe47c;    /* สีเหลืองดาว/ครีม */
+  --green-accent: #9ce3b5;     /* สีเขียวพาสเทล (จากพื้นหญ้าด้านล่าง) */
 
-  --bg-top: #fff6fb;           /* พื้นหลังด้านบนชมพูพาสเทลอ่อนมากๆ */
-  --bg-bottom: #f2f9f5;        /* พื้นหลังด้านล่างเขียวพาสเทลอ่อน */
+  --bg-top: #fff6fb;           /* พื้นหลังด้านบนชมพูอ่อนมากๆ */
+  --bg-bottom: #f2faf5;        /* พื้นหลังด้านล่างเขียวพาสเทลอ่อน */
 
-  --ink: #5a4268;              /* สีตัวอักษรหลักโทนม่วงเข้ม อ่านง่ายสบายตา */
-  --ink-muted: #947e9e;        /* สีม่วงอมเทาสำหรับข้อความรอง */
+  --ink: #6b5263;              /* สีตัวอักษรหลักโทนน้ำตาลม่วงละมุน อ่านง่าย */
+  --ink-muted: #a0869a;        /* สีข้อความรอง */
 
-  --border: #ebdff2;           /* เส้นขอบสีพาสเทลอ่อน */
+  --border: #fce1ed;           /* เส้นขอบสีชมพูพาสเทลอ่อน */
   --surface: #ffffff;          
-  --tile-bg: #faf6fd;          /* สีพื้นหลังช่องข้อมูลภายใน */
+  --tile-bg: #fff9fc;          /* สีพื้นหลังช่องข้อมูลภายใน */
 
-  --shadow-sm: 0 4px 18px rgba(155, 108, 183, 0.06);
-  --shadow-lg: 0 22px 46px rgba(155, 108, 183, 0.1);
+  --shadow-sm: 0 4px 18px rgba(255, 123, 172, 0.08);
+  --shadow-lg: 0 22px 46px rgba(255, 123, 172, 0.12);
 
   --radius-lg: 24px;
   --radius-md: 16px;
@@ -71,11 +71,11 @@ a { color: inherit; }
   }
 }
 
-/* --- แถบสีบนสุดของเว็บไซต์ --- */
+/* --- แถบสีบนสุดผสมสีฟ้า ชมพู เหลือง เขียว --- */
 .top-strip {
   height: 6px;
   width: 100%;
-  background: linear-gradient(90deg, var(--pink-accent) 0%, var(--purple-accent) 50%, var(--yellow-accent) 100%);
+  background: linear-gradient(90deg, var(--blue-accent) 0%, var(--primary) 35%, var(--yellow-accent) 70%, var(--green-accent) 100%);
 }
 
 .site-header {
@@ -104,8 +104,8 @@ a { color: inherit; }
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--pink-accent);
-  box-shadow: 0 0 0 3px rgba(255, 158, 203, 0.3);
+  background: var(--green-accent);
+  box-shadow: 0 0 0 3px rgba(156, 227, 181, 0.4);
 }
 
 main {
@@ -126,14 +126,14 @@ main {
   padding: 36px 32px 32px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
 }
 
 .banner-wrap {
   margin: 0 0 26px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 10px 26px rgba(155, 108, 183, 0.08);
+  box-shadow: 0 10px 26px rgba(137, 212, 237, 0.2);
 }
 
 .banner-img {
@@ -145,8 +145,8 @@ main {
 
 /* --- กล่องประกาศ --- */
 .announce-box {
-  background: var(--pink-light);
-  border: 1px solid var(--border);
+  background: var(--blue-light);
+  border: 1px solid var(--blue-accent);
   padding: 16px 20px;
   border-radius: var(--radius-sm);
   margin-bottom: 26px;
@@ -161,7 +161,7 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--primary);
+  color: #38a3c6;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -233,9 +233,9 @@ main {
 }
 
 .search input:focus {
-  border-color: var(--primary);
+  border-color: var(--blue-accent);
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(155, 108, 183, 0.12);
+  box-shadow: 0 0 0 4px rgba(137, 212, 237, 0.2);
 }
 
 .search button {
@@ -250,7 +250,7 @@ main {
   border-radius: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 6px 16px rgba(155, 108, 183, 0.24);
+  box-shadow: 0 6px 16px rgba(255, 123, 172, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -260,7 +260,7 @@ main {
 .search button:hover {
   background: var(--primary-dark);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(155, 108, 183, 0.32);
+  box-shadow: 0 8px 20px rgba(255, 123, 172, 0.4);
 }
 
 .search button:active {
@@ -286,20 +286,20 @@ main {
 }
 
 .history-tag {
-  background: var(--pink-light);
+  background: var(--blue-light);
   padding: 6px 16px;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s;
-  color: var(--primary);
+  color: #38a3c6;
   font-weight: 500;
-  border: 1px solid var(--pink-accent);
+  border: 1px solid var(--blue-accent);
 }
 
 .history-tag:hover {
-  background: var(--primary);
+  background: var(--blue-accent);
   color: white;
-  border-color: var(--primary);
+  border-color: var(--blue-accent);
 }
 
 #result {
@@ -335,7 +335,7 @@ main {
   background: var(--surface);
   padding: 32px;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   box-shadow: var(--shadow-sm);
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -353,7 +353,7 @@ main {
   flex-wrap: wrap;
   padding-bottom: 22px;
   margin-bottom: 22px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px dashed var(--border);
 }
 
 .card-header-main {
@@ -379,14 +379,14 @@ main {
 
 .badge {
   display: inline-block;
-  background: var(--pink-light);
-  color: var(--primary);
+  background: var(--yellow-accent);
+  color: #7a6505;
   padding: 5px 14px;
   border-radius: 30px;
   font-weight: 600;
   font-size: 13px;
   width: fit-content;
-  border: 1px solid var(--pink-accent);
+  border: 1px solid #f2d45c;
 }
 
 .status-pill {
@@ -409,29 +409,29 @@ main {
 }
 
 .status-pill.in-progress {
-  background: var(--pink-light);
-  color: var(--primary);
-  border: 1px solid var(--pink-accent);
+  background: var(--blue-light);
+  color: #2884a1;
+  border: 1px solid var(--blue-accent);
 }
 .status-pill.in-progress .dot {
-  background: var(--pink-accent);
-  box-shadow: 0 0 0 3px rgba(255, 158, 203, 0.3);
+  background: var(--blue-accent);
+  box-shadow: 0 0 0 3px rgba(137, 212, 237, 0.3);
 }
 
 .status-pill.done {
-  background: var(--primary-light);
-  color: var(--primary);
-  border: 1px solid var(--border);
+  background: #f0faf4;
+  color: #2e824c;
+  border: 1px solid var(--green-accent);
 }
 .status-pill.done .dot {
-  background: var(--primary);
-  box-shadow: 0 0 0 3px rgba(155, 108, 183, 0.15);
+  background: var(--green-accent);
+  box-shadow: 0 0 0 3px rgba(156, 227, 181, 0.4);
 }
 
-/* --- ระบบ "การ์ดข้อมูล" เดียวกันทุกส่วน --- */
+/* --- การ์ดข้อมูล --- */
 .section-label {
   font-size: 12px;
-  color: var(--ink-muted);
+  color: var(--primary);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -522,7 +522,7 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: var(--primary);
+  color: #38a3c6;
   text-decoration: underline;
   font-weight: 600;
   font-size: 12.5px;
@@ -530,7 +530,7 @@ main {
 }
 
 .btn-track-link:hover {
-  color: var(--primary-dark);
+  color: #23748f;
 }
 
 /* --- ตั๋วคั่นระหว่างข้อมูลออเดอร์กับไทม์ไลน์ --- */
@@ -548,11 +548,11 @@ main {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: var(--pink-accent);
+  background: var(--blue-accent);
 }
 
 .ticket-divider::before { left: -3px; }
-.ticket-divider::after { right: -3px; background: var(--purple-accent); }
+.ticket-divider::after { right: -3px; background: var(--yellow-accent); }
 
 /* --- ✨ ไทม์ไลน์แนวตั้ง --- */
 .timeline-section {
@@ -602,22 +602,22 @@ main {
   font-size: 14px;
   flex-shrink: 0;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(155, 108, 183, 0.05);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
 }
 
 .timeline-circle.done {
-  background: var(--primary-light);
-  border-color: var(--primary);
-  color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(155, 108, 183, 0.1);
+  background: #f0faf4;
+  border-color: var(--green-accent);
+  color: #2e824c;
+  box-shadow: 0 0 0 4px rgba(156, 227, 181, 0.2);
 }
 
 .timeline-circle.active {
-  background: var(--pink-light);
-  border-color: var(--pink-accent);
-  color: var(--primary);
+  background: var(--blue-light);
+  border-color: var(--blue-accent);
+  color: #2884a1;
   transform: scale(1.15);
-  box-shadow: 0 0 0 6px rgba(255, 158, 203, 0.25);
+  box-shadow: 0 0 0 6px rgba(137, 212, 237, 0.3);
 }
 
 .timeline-content {
@@ -639,7 +639,7 @@ main {
 
 .timeline-subtext {
   font-size: 12px;
-  color: var(--primary);
+  color: #2884a1;
   font-weight: 500;
   margin-top: 3px;
 }
@@ -660,13 +660,13 @@ main {
   margin-bottom: 10px;
 }
 
-/* --- ตารางรอบขนส่งภาพรวม --- */
+/* --- ตารางรอบขนส่งภาพรวม (แบบไม่มีเส้นตาราง) --- */
 .batch-section {
   background: var(--surface);
   padding: 30px 32px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
 }
 
 .section-eyebrow {
@@ -674,7 +674,7 @@ main {
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--primary);
+  color: #38a3c6;
   margin-bottom: 4px;
 }
 
@@ -695,45 +695,43 @@ main {
 .batch-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 6px;
+  border-spacing: 0 8px;
   text-align: left;
   font-size: 14px;
   min-width: 540px;
 }
 
 .batch-table th {
-  background-color: var(--pink-light);
-  color: var(--primary);
-  font-weight: 600;
-  padding: 12px 16px;
+  background-color: transparent;
+  color: #38a3c6;
+  font-weight: 700;
+  padding: 8px 16px;
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
-  border: 1px solid var(--pink-accent);
+  letter-spacing: 0.5px;
+  border: none;
 }
 
-.batch-table th:first-child { border-radius: 10px 0 0 10px; }
-.batch-table th:last-child { border-radius: 0 10px 10px 0; }
-
 .batch-table td {
-  padding: 14px 16px;
+  padding: 16px;
   background: var(--tile-bg);
   color: var(--ink);
   font-size: 13.5px;
+  border: none;
 }
 
-.batch-table td:first-child { border-radius: 10px 0 0 10px; }
-.batch-table td:last-child { border-radius: 0 10px 10px 0; }
+.batch-table td:first-child { border-radius: 14px 0 0 14px; }
+.batch-table td:last-child { border-radius: 0 14px 14px 0; }
 
 .batch-badge {
   display: inline-block;
-  background: var(--pink-light);
-  color: var(--primary);
+  background: var(--yellow-accent);
+  color: #7a6505;
   padding: 4px 12px;
   border-radius: 20px;
   font-weight: 600;
   font-size: 12px;
-  border: 1px solid var(--pink-accent);
+  border: 1px solid #f2d45c;
 }
 
 /* --- ส่วน Footer และนโยบายร้าน --- */
@@ -742,7 +740,7 @@ main {
   padding: 30px 32px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   text-align: center;
 }
 
@@ -891,7 +889,7 @@ main {
       </thead>
       <tbody id="batchTableBody">
         <tr>
-          <td colspan="5" style="text-align: center; color: var(--ink-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td>
+          <td colspan="5" style="text-align: center; color: var(--ink-muted); padding: 20px; border-radius: 14px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td>
         </tr>
       </tbody>
     </table>
@@ -958,7 +956,7 @@ async function loadShippingBatches() {
     let tbody = document.getElementById("batchTableBody");
 
     if (!json.success || !json.data || json.data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--ink-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--ink-muted); padding: 20px; border-radius: 14px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
       return;
     }
 
@@ -975,7 +973,7 @@ async function loadShippingBatches() {
     tbody.innerHTML = html;
   } catch (err) {
     console.error(err);
-    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--ink-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
+    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--ink-muted); padding: 20px; border-radius: 14px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
   }
 }
 
@@ -1059,7 +1057,7 @@ function showData(data) {
   let status = [
     "รับออเดอร์",
     (data.status === "กดเว็บแล้ว" || data.status === "หิ้วแล้ว") ? data.status : "กดเว็บแล้ว",
-    (data.status === "ของถึงบ้านญี่ปุ่น" || data.status === "ของถึงโกดังญี่ปุ่น") ? data.status : "ของถึงบ้านญี่ปุ่น",
+    (data.status === "ของถึงบ้านญี่ปุ่น" || data.status === "ของถึงโกดังญี่ปุ่น") ? data.status : "ของถึงโกดังญี่ปุ่น",
     "ของถึงโกดังไทย",
     "รอร้านจัดส่ง",
     "จัดส่งแล้ว"
