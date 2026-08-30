@@ -10,32 +10,30 @@
 
 <style>
 
-/* --- 🎨 ดีไซน์โทนสีใหม่ (Cafe & Strawberry Bear Theme) --- */
+/* --- 🎨 โทนสีใหม่ตาม Moodboard (Chocolate, Soft Blue, Cream) --- */
 :root {
-  --primary: #ff6b97;          /* สีชมพูสตรอว์เบอร์รีสดใสจากในรูป */
-  --primary-dark: #e04a78;     /* สีชมพูเข้มสำหรับ Hover */
-  --primary-light: #ffe4ee;    /* สีชมพูอ่อนพาสเทลมากๆ สำหรับพื้นหลังไฮไลท์ */
+  --primary: #664734;          /* สีน้ำตาลเข้มหลักจากแบรนด์ */
+  --primary-dark: #473023;     /* สีน้ำตาลเข้มขึ้นสำหรับ Hover */
+  --primary-light: #f5ebe6;    /* สีน้ำตาลอ่อนเจือครีมสำหรับพื้นหลังไฮไลท์ */
 
-  --sage: #d4a373;             /* ปรับโทนสีเขียวเดิมให้เข้ากับสีน้ำตาลครีมของน้องหมี */
-  --sage-dark: #8c5830;        /* สีน้ำตาลเข้มลายเส้นและข้อความน้องหมี */
-  --sage-light: #fefae0;       /* สีครีมอ่อนละมุน */
+  --blue-accent: #a5c7e7;      /* สีฟ้าพาสเทลจากภาพ */
+  --blue-light: #edf4fb;       /* สีฟ้าอ่อนละมุน */
 
-  --gold: #ffb703;             /* สีเหลืองเนยอบอุ่น */
-  --gold-dark: #fb8500;        /* สีส้มคาราเมล */
-  --gold-light: #fff3db;       /* สีครีมวานิลลา */
+  --cream-bg: #ede8d5;         /* สีครีมวานิลลาจากภาพ */
+  --cream-surface: #fcfbfa;    /* สีพื้นหลังการ์ดขาวนวลอบอุ่น */
 
-  --bg-top: #fff0f5;           /* พื้นหลังด้านบนชมพูระเรื่อ */
-  --bg-bottom: #fffdf9;        /* พื้นหลังด้านล่างขาวครีมสะอาดตา */
+  --bg-top: #f7f4ee;           /* พื้นหลังด้านบนครีมละมุน */
+  --bg-bottom: #edf4fb;        /* พื้นหลังด้านล่างฟ้าพาสเทลอ่อน */
 
-  --ink: #4a3b32;              /* สีน้ำตาลเข้มตัวอักษรอ่านง่าย สบายตา */
-  --ink-muted: #9e8a82;        /* สีน้ำตาลเทาสำหรับข้อความรอง */
+  --ink: #473023;              /* สีตัวอักษรหลักน้ำตาลเข้ม อ่านง่ายอบอุ่น */
+  --ink-muted: #8c786d;        /* สีน้ำตาลอมเทาสำหรับข้อความรอง */
 
-  --border: #f9dbe6;           /* เส้นขอบสีชมพูพาสเทลอ่อนๆ */
+  --border: #e6dfd5;           /* เส้นขอบสีครีมน้ำตาลอ่อน */
   --surface: #ffffff;          
-  --tile-bg: #fff9fb;          /* สีพื้นหลังการ์ดด้านในอมชมพูจางๆ */
+  --tile-bg: #f7f4ee;          /* สีพื้นหลังช่องข้อมูลภายใน */
 
-  --shadow-sm: 0 4px 18px rgba(224, 74, 120, 0.06);
-  --shadow-lg: 0 22px 46px rgba(224, 74, 120, 0.1);
+  --shadow-sm: 0 4px 18px rgba(103, 71, 52, 0.06);
+  --shadow-lg: 0 22px 46px rgba(103, 71, 52, 0.1);
 
   --radius-lg: 24px;
   --radius-md: 16px;
@@ -77,7 +75,7 @@ a { color: inherit; }
 .top-strip {
   height: 6px;
   width: 100%;
-  background: linear-gradient(90deg, var(--primary) 0%, var(--gold) 50%, var(--sage-dark) 100%);
+  background: linear-gradient(90deg, var(--primary) 0%, var(--blue-accent) 50%, var(--cream-bg) 100%);
 }
 
 .site-header {
@@ -107,7 +105,7 @@ a { color: inherit; }
   height: 7px;
   border-radius: 50%;
   background: var(--primary);
-  box-shadow: 0 0 0 3px rgba(255, 107, 151, 0.18);
+  box-shadow: 0 0 0 3px rgba(103, 71, 52, 0.18);
 }
 
 main {
@@ -135,7 +133,7 @@ main {
   margin: 0 0 26px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 10px 26px rgba(224, 74, 120, 0.1);
+  box-shadow: 0 10px 26px rgba(103, 71, 52, 0.08);
 }
 
 .banner-img {
@@ -147,8 +145,8 @@ main {
 
 /* --- กล่องประกาศ --- */
 .announce-box {
-  background: var(--gold-light);
-  border: 1px solid #ffe0a3;
+  background: var(--cream-bg);
+  border: 1px solid var(--border);
   padding: 16px 20px;
   border-radius: var(--radius-sm);
   margin-bottom: 26px;
@@ -163,7 +161,7 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--gold-dark);
+  color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -180,7 +178,7 @@ main {
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--ink-muted);
   margin-bottom: 8px;
 }
 
@@ -191,7 +189,7 @@ main {
   letter-spacing: -0.3px;
   margin-bottom: 28px;
   text-align: center;
-  color: var(--ink);
+  color: var(--primary);
   line-height: 1.3;
 }
 
@@ -237,7 +235,7 @@ main {
 .search input:focus {
   border-color: var(--primary);
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(255, 107, 151, 0.15);
+  box-shadow: 0 0 0 4px rgba(103, 71, 52, 0.12);
 }
 
 .search button {
@@ -252,7 +250,7 @@ main {
   border-radius: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 6px 16px rgba(255, 107, 151, 0.3);
+  box-shadow: 0 6px 16px rgba(103, 71, 52, 0.24);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -262,7 +260,7 @@ main {
 .search button:hover {
   background: var(--primary-dark);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(255, 107, 151, 0.4);
+  box-shadow: 0 8px 20px rgba(103, 71, 52, 0.32);
 }
 
 .search button:active {
@@ -288,14 +286,14 @@ main {
 }
 
 .history-tag {
-  background: var(--primary-light);
+  background: var(--blue-light);
   padding: 6px 16px;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s;
-  color: var(--primary-dark);
+  color: var(--primary);
   font-weight: 500;
-  border: 1px solid transparent;
+  border: 1px solid var(--blue-accent);
 }
 
 .history-tag:hover {
@@ -375,19 +373,20 @@ main {
 .order {
   font-size: 19px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--primary);
   word-break: break-word;
 }
 
 .badge {
   display: inline-block;
-  background: var(--gold-light);
-  color: var(--gold-dark);
+  background: var(--blue-light);
+  color: var(--primary);
   padding: 5px 14px;
   border-radius: 30px;
   font-weight: 600;
   font-size: 13px;
   width: fit-content;
+  border: 1px solid var(--blue-accent);
 }
 
 .status-pill {
@@ -410,21 +409,23 @@ main {
 }
 
 .status-pill.in-progress {
-  background: var(--primary-light);
-  color: var(--primary-dark);
+  background: var(--blue-light);
+  color: var(--primary);
+  border: 1px solid var(--blue-accent);
 }
 .status-pill.in-progress .dot {
-  background: var(--primary);
-  box-shadow: 0 0 0 3px rgba(255, 107, 151, 0.2);
+  background: var(--blue-accent);
+  box-shadow: 0 0 0 3px rgba(165, 199, 231, 0.3);
 }
 
 .status-pill.done {
-  background: var(--gold-light);
-  color: var(--gold-dark);
+  background: var(--cream-bg);
+  color: var(--primary);
+  border: 1px solid var(--border);
 }
 .status-pill.done .dot {
-  background: var(--gold-dark);
-  box-shadow: 0 0 0 3px rgba(251, 133, 0, 0.2);
+  background: var(--primary);
+  box-shadow: 0 0 0 3px rgba(103, 71, 52, 0.15);
 }
 
 /* --- ระบบ "การ์ดข้อมูล" เดียวกันทุกส่วน --- */
@@ -513,7 +514,7 @@ main {
 
 .copy-btn:hover {
   border-color: var(--primary);
-  color: var(--primary-dark);
+  color: var(--primary);
   background: var(--primary-light);
 }
 
@@ -521,7 +522,7 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: var(--primary-dark);
+  color: var(--primary);
   text-decoration: underline;
   font-weight: 600;
   font-size: 12.5px;
@@ -529,10 +530,10 @@ main {
 }
 
 .btn-track-link:hover {
-  color: var(--primary);
+  color: var(--primary-dark);
 }
 
-/* --- ตั๋วคั่นระหว่างข้อมูลออเดอร์กับไทม์ไลน์ (Signature: ticket stub) --- */
+/* --- ตั๋วคั่นระหว่างข้อมูลออเดอร์กับไทม์ไลน์ --- */
 .ticket-divider {
   position: relative;
   border-top: 2px dashed var(--border);
@@ -547,7 +548,7 @@ main {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--blue-accent);
 }
 
 .ticket-divider::before { left: -3px; }
@@ -601,21 +602,22 @@ main {
   font-size: 14px;
   flex-shrink: 0;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(224, 74, 120, 0.05);
+  box-shadow: 0 2px 6px rgba(103, 71, 52, 0.05);
 }
 
 .timeline-circle.done {
-  background: var(--gold-light);
-  border-color: var(--gold-dark);
-  color: var(--gold-dark);
-  box-shadow: 0 0 0 4px rgba(251, 133, 0, 0.14);
+  background: var(--cream-bg);
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(103, 71, 52, 0.1);
 }
 
 .timeline-circle.active {
-  background: var(--primary-light);
-  border-color: var(--primary);
+  background: var(--blue-light);
+  border-color: var(--blue-accent);
+  color: var(--primary);
   transform: scale(1.15);
-  box-shadow: 0 0 0 6px rgba(255, 107, 151, 0.18);
+  box-shadow: 0 0 0 6px rgba(165, 199, 231, 0.25);
 }
 
 .timeline-content {
@@ -637,7 +639,7 @@ main {
 
 .timeline-subtext {
   font-size: 12px;
-  color: var(--primary-dark);
+  color: var(--primary);
   font-weight: 500;
   margin-top: 3px;
 }
@@ -700,13 +702,14 @@ main {
 }
 
 .batch-table th {
-  background-color: var(--primary-light);
-  color: var(--primary-dark);
+  background-color: var(--blue-light);
+  color: var(--primary);
   font-weight: 600;
   padding: 12px 16px;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.4px;
+  border: 1px solid var(--blue-accent);
 }
 
 .batch-table th:first-child { border-radius: 10px 0 0 10px; }
@@ -724,12 +727,13 @@ main {
 
 .batch-badge {
   display: inline-block;
-  background: var(--gold-light);
-  color: var(--gold-dark);
+  background: var(--cream-bg);
+  color: var(--primary);
   padding: 4px 12px;
   border-radius: 20px;
   font-weight: 600;
   font-size: 12px;
+  border: 1px solid var(--border);
 }
 
 /* --- ส่วน Footer และนโยบายร้าน --- */
@@ -794,7 +798,7 @@ main {
   border: 1px solid var(--border);
 }
 
-.shop-policy strong { color: var(--primary-dark); }
+.shop-policy strong { color: var(--primary); }
 
 .site-footer {
   text-align: center;
