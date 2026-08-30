@@ -11,36 +11,34 @@
 <style>
 
 /* --- 🎨 ดีไซน์โทนสีและตัวแปรหลัก (Design Tokens) --- */
-/* Palette inspired by "Strawberry Cottage": Raspberry Pink · Sage Green · Butter Gold · Cream White */
+/* Palette: Crimson Red #B01013 · Baby Blue #A2B9D5 · Vanilla Cream #F4F2E2 · Mint Green #AACCB1 */
 :root {
-  --primary: #e14f81;
-  --primary-dark: #c23768;
-  --primary-light: #fce6ee;
+  --primary-color: #b01013;
+  --primary-hover: #8c0d10;
+  --primary-light: #fbe7e6;
 
-  --sage: #7fb88f;
-  --sage-dark: #4c8a61;
-  --sage-light: #e8f4ec;
+  --blue: #a2b9d5;
+  --blue-dark: #6d87a8;
+  --blue-light: #eef2f8;
 
-  --gold: #e6b84a;
-  --gold-dark: #b8912f;
-  --gold-light: #fbf1d9;
+  --mint: #aaccb1;
+  --mint-dark: #6f9878;
+  --mint-light: #eaf4ec;
 
-  --bg-top: #fff8f4;
-  --bg-bottom: #f2faf6;
+  --bg-gradient-start: #f6f3e6;
+  --bg-gradient-end: #e7ecf3;
 
-  --ink: #3c2f34;
-  --ink-muted: #8d7d84;
+  --text-main: #362f2a;
+  --text-muted: #8d8375;
 
-  --border: #f0e2e7;
-  --surface: #ffffff;
-  --tile-bg: #fbf7f5;
+  --border-color: #e9e1cf;
+  --card-bg: #fffdf8;
 
-  --shadow-sm: 0 4px 18px rgba(60, 47, 52, 0.06);
-  --shadow-lg: 0 22px 46px rgba(60, 47, 52, 0.09);
+  --shadow-sm: 0 4px 20px rgba(176, 16, 19, 0.06);
+  --shadow-lg: 0 20px 44px rgba(54, 47, 42, 0.08);
 
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 12px;
+  --radius-lg: 26px;
+  --radius-md: 18px;
 }
 
 * {
@@ -49,20 +47,27 @@
   box-sizing: border-box;
 }
 
-html, body {
+body {
+  font-family: 'Prompt', sans-serif;
+  background: linear-gradient(160deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  background-attachment: fixed;
+  padding: 40px 16px 60px;
+  color: var(--text-main);
   min-height: 100vh;
 }
 
-body {
-  font-family: 'Prompt', sans-serif;
-  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
-  color: var(--ink);
+.container {
+  max-width: 760px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 a { color: inherit; }
 
 :focus-visible {
-  outline: 3px solid var(--sage-dark);
+  outline: 3px solid var(--blue-dark);
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -74,69 +79,31 @@ a { color: inherit; }
   }
 }
 
-/* --- แถบสีบนสุดของเว็บไซต์ --- */
-.top-strip {
-  height: 6px;
-  width: 100%;
-  background: linear-gradient(90deg, var(--primary) 0%, var(--gold) 50%, var(--sage) 100%);
-}
-
-.site-header {
-  padding: 16px 16px 0;
-}
-
-.site-header-inner {
-  max-width: 760px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 4px;
-  font-size: 12.5px;
-  color: var(--ink-muted);
-}
-
-.site-header-inner .status-dot-live {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
-}
-
-.site-header-inner .status-dot-live .pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--sage-dark);
-  box-shadow: 0 0 0 3px rgba(79, 138, 97, 0.18);
-}
-
-main {
-  padding: 12px 16px 60px;
-}
-
-.container {
-  max-width: 760px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
 /* --- การ์ดหลักและส่วนค้นหา --- */
 .search-card {
-  background: var(--surface);
+  background: var(--card-bg);
   padding: 36px 32px 32px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--blue) 50%, var(--mint) 100%);
 }
 
 .banner-wrap {
-  margin: 0 0 26px;
-  border-radius: var(--radius-md);
+  margin: 6px 0 26px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 26px rgba(60, 47, 52, 0.1);
+  box-shadow: 0 10px 26px rgba(54, 47, 42, 0.12);
+  position: relative;
 }
 
 .banner-img {
@@ -148,30 +115,30 @@ main {
 
 /* --- กล่องประกาศ --- */
 .announce-box {
-  background: var(--gold-light);
-  border: 1px solid #f0dfa8;
-  padding: 16px 20px;
-  border-radius: var(--radius-sm);
+  background: var(--blue-light);
+  border: 1.5px dashed var(--blue-dark);
+  padding: 18px 22px;
+  border-radius: var(--radius-md);
   margin-bottom: 26px;
   display: none;
   line-height: 1.6;
 }
 
 .announce-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--gold-dark);
+  color: var(--blue-dark);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 #announceText {
   font-size: 14px;
-  color: var(--ink);
+  color: var(--text-main);
   opacity: 0.85;
 }
 
@@ -181,18 +148,18 @@ main {
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 8px;
+  color: var(--mint-dark);
+  margin-bottom: 6px;
 }
 
 .title {
   font-family: 'Prompt', sans-serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -0.3px;
-  margin-bottom: 28px;
+  margin-bottom: 26px;
   text-align: center;
-  color: var(--ink);
+  color: var(--text-main);
   line-height: 1.3;
 }
 
@@ -213,47 +180,47 @@ main {
   left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--ink-muted);
+  color: var(--text-muted);
   pointer-events: none;
 }
 
 .search input {
   width: 100%;
   height: 56px;
-  border-radius: 14px;
-  border: 2px solid var(--border);
+  border-radius: 16px;
+  border: 2px solid var(--border-color);
   padding: 0 18px 0 46px;
   font-size: 16px;
   font-family: inherit;
   outline: none;
-  transition: all 0.2s ease;
-  background: var(--tile-bg);
-  color: var(--ink);
+  transition: all 0.25s ease;
+  background: #fcfbf6;
+  color: var(--text-main);
 }
 
 .search input::placeholder {
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 
 .search input:focus {
-  border-color: var(--primary);
+  border-color: var(--primary-color);
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(225, 79, 129, 0.12);
+  box-shadow: 0 0 0 4px rgba(176, 16, 19, 0.12);
 }
 
 .search button {
   width: 128px;
   flex-shrink: 0;
   border: none;
-  background: var(--primary);
+  background: var(--primary-color);
   color: white;
   font-size: 16px;
   font-weight: 600;
   font-family: inherit;
-  border-radius: 14px;
+  border-radius: 16px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 6px 16px rgba(225, 79, 129, 0.28);
+  box-shadow: 0 6px 16px rgba(176, 16, 19, 0.28);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -261,9 +228,9 @@ main {
 }
 
 .search button:hover {
-  background: var(--primary-dark);
+  background: var(--primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(225, 79, 129, 0.36);
+  box-shadow: 0 8px 20px rgba(176, 16, 19, 0.36);
 }
 
 .search button:active {
@@ -280,7 +247,7 @@ main {
 .history-container {
   margin-top: 16px;
   font-size: 13px;
-  color: var(--ink-muted);
+  color: var(--text-muted);
   display: none;
   align-items: center;
   gap: 8px;
@@ -289,20 +256,20 @@ main {
 }
 
 .history-tag {
-  background: var(--sage-light);
+  background: var(--blue-light);
   padding: 6px 16px;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s;
-  color: var(--sage-dark);
+  color: var(--blue-dark);
   font-weight: 500;
   border: 1px solid transparent;
 }
 
 .history-tag:hover {
   background: var(--primary-light);
-  color: var(--primary-dark);
-  border-color: var(--primary);
+  color: var(--primary-hover);
+  border-color: var(--primary-color);
 }
 
 #result {
@@ -312,8 +279,8 @@ main {
 /* --- สถานะกำลังโหลด (Skeleton) --- */
 .loading-state {
   text-align: center;
-  padding: 44px 20px;
-  color: var(--ink-muted);
+  padding: 40px 20px;
+  color: var(--text-muted);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -324,8 +291,8 @@ main {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  border: 3px solid var(--border);
-  border-top-color: var(--primary);
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary-color);
   animation: spin 0.8s linear infinite;
 }
 
@@ -335,10 +302,10 @@ main {
 
 /* --- กล่องผลลัพธ์การค้นหา --- */
 .card {
-  background: var(--surface);
+  background: var(--card-bg);
   padding: 32px;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -354,9 +321,7 @@ main {
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  padding-bottom: 22px;
-  margin-bottom: 22px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
 }
 
 .card-header-main {
@@ -370,20 +335,20 @@ main {
   font-weight: 700;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 
 .order {
   font-size: 19px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--text-main);
   word-break: break-word;
 }
 
 .badge {
   display: inline-block;
-  background: var(--sage-light);
-  color: var(--sage-dark);
+  background: var(--blue-light);
+  color: var(--blue-dark);
   padding: 5px 14px;
   border-radius: 30px;
   font-weight: 600;
@@ -412,93 +377,155 @@ main {
 
 .status-pill.in-progress {
   background: var(--primary-light);
-  color: var(--primary-dark);
+  color: var(--primary-hover);
 }
 .status-pill.in-progress .dot {
-  background: var(--primary);
-  box-shadow: 0 0 0 3px rgba(225, 79, 129, 0.18);
+  background: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(176, 16, 19, 0.18);
 }
 
 .status-pill.done {
-  background: var(--sage-light);
-  color: var(--sage-dark);
+  background: var(--mint-light);
+  color: var(--mint-dark);
 }
 .status-pill.done .dot {
-  background: var(--sage-dark);
-  box-shadow: 0 0 0 3px rgba(79, 138, 97, 0.2);
+  background: var(--mint-dark);
+  box-shadow: 0 0 0 3px rgba(170, 204, 177, 0.3);
 }
 
-/* --- ระบบ "การ์ดข้อมูล" เดียวกันทุกส่วน (สม่ำเสมอ ไม่ชิดขวา) --- */
-.section-label {
-  font-size: 12px;
-  color: var(--ink-muted);
+/* กล่องรายการสินค้า */
+.box {
+  background: #faf8f0;
+  padding: 20px;
+  border-left: 4px solid var(--primary-color);
+  border-radius: 16px;
+  margin-top: 22px;
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.box h3 {
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 6px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  margin: 0 0 12px;
-}
-
-.section-label.spaced {
-  margin-top: 28px;
-}
-
-.info-tile {
-  background: var(--tile-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 16px 18px;
-}
-
-.info-tile + .info-tile {
-  margin-top: 10px;
-}
-
-.info-tile-label {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--ink-muted);
-  margin-bottom: 8px;
-}
-
-.info-tile-value {
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1.7;
-  word-break: break-word;
-}
-
-.info-tile-value.muted {
-  font-weight: 500;
-  color: var(--ink-muted);
+  letter-spacing: 0.4px;
 }
 
 .product-content {
   font-size: 14px;
-  color: var(--ink);
+  background: #ffffff;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
   font-weight: 500;
-  line-height: 1.9;
+  line-height: 1.8;
   word-break: break-word;
+}
+
+.section-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin: 26px 0 4px;
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row.align-start {
+  align-items: flex-start;
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.info-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: right;
+  min-width: 0;
+}
+
+.address-section {
+  margin-top: 18px;
+  background: #faf8f0;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--blue);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.address-section-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 10px;
+}
+
+.address-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+
+.address-text.empty {
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 .tracking-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .copy-btn {
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   background: #fff;
-  color: var(--ink-muted);
+  color: var(--text-muted);
   font-family: inherit;
   font-size: 12px;
   font-weight: 600;
@@ -513,8 +540,8 @@ main {
 }
 
 .copy-btn:hover {
-  border-color: var(--primary);
-  color: var(--primary-dark);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
   background: var(--primary-light);
 }
 
@@ -522,22 +549,22 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: var(--primary-dark);
+  color: var(--primary-hover);
   text-decoration: underline;
   font-weight: 600;
   font-size: 12.5px;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .btn-track-link:hover {
-  color: var(--primary);
+  color: var(--primary-color);
 }
 
 /* --- ตั๋วคั่นระหว่างข้อมูลออเดอร์กับไทม์ไลน์ (Signature: ticket stub) --- */
 .ticket-divider {
   position: relative;
-  border-top: 2px dashed var(--border);
-  margin: 28px 0 0;
+  border-top: 2px dashed var(--border-color);
+  margin: 30px 0 0;
 }
 
 .ticket-divider::before,
@@ -548,22 +575,24 @@ main {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: var(--sage);
+  background: var(--mint);
 }
 
 .ticket-divider::before { left: -3px; }
-.ticket-divider::after { right: -3px; background: var(--primary); }
+.ticket-divider::after { right: -3px; background: var(--primary-color); }
 
 /* --- ✨ ไทม์ไลน์แนวตั้ง --- */
 .timeline-section {
-  margin-top: 4px;
-  background: var(--tile-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  margin-top: 8px;
+  background: #faf8f0;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--mint-dark);
+  border-radius: 16px;
   padding: 22px 20px 18px;
 }
 
 .timeline-vertical {
+  margin-top: 4px;
   position: relative;
   padding-left: 4px;
   display: flex;
@@ -578,7 +607,7 @@ main {
   bottom: 10px;
   left: 19px;
   width: 3px;
-  background: var(--border);
+  background: var(--border-color);
   z-index: 0;
 }
 
@@ -595,28 +624,28 @@ main {
   height: 32px;
   border-radius: 50%;
   background: #ffffff;
-  border: 2px solid var(--border);
+  border: 2px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   flex-shrink: 0;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(60, 47, 52, 0.05);
+  box-shadow: 0 2px 6px rgba(54, 47, 42, 0.04);
 }
 
 .timeline-circle.done {
-  background: var(--sage-light);
-  border-color: var(--sage-dark);
-  color: var(--sage-dark);
-  box-shadow: 0 0 0 4px rgba(79, 138, 97, 0.14);
+  background: var(--mint-light);
+  border-color: var(--mint-dark);
+  color: var(--mint-dark);
+  box-shadow: 0 0 0 4px rgba(170, 204, 177, 0.25);
 }
 
 .timeline-circle.active {
   background: var(--primary-light);
-  border-color: var(--primary);
+  border-color: var(--primary-color);
   transform: scale(1.15);
-  box-shadow: 0 0 0 6px rgba(225, 79, 129, 0.15);
+  box-shadow: 0 0 0 6px rgba(176, 16, 19, 0.15);
 }
 
 .timeline-content {
@@ -628,29 +657,29 @@ main {
 .timeline-label {
   font-size: 14px;
   font-weight: 600;
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 
 .timeline-item.is-active .timeline-label,
 .timeline-item.is-done .timeline-label {
-  color: var(--ink);
+  color: var(--text-main);
 }
 
 .timeline-subtext {
   font-size: 12px;
-  color: var(--primary-dark);
+  color: var(--primary-hover);
   font-weight: 500;
   margin-top: 3px;
 }
 
 .notfound {
-  background: var(--surface);
+  background: var(--card-bg);
   padding: 40px 30px;
   border-radius: var(--radius-lg);
   text-align: center;
   font-size: 15px;
-  color: var(--ink-muted);
-  border: 2px dashed var(--border);
+  color: var(--text-muted);
+  border: 2px dashed var(--border-color);
   line-height: 1.7;
 }
 
@@ -661,11 +690,11 @@ main {
 
 /* --- ตารางรอบขนส่งภาพรวม --- */
 .batch-section {
-  background: var(--surface);
+  background: var(--card-bg);
   padding: 30px 32px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
 }
 
 .section-eyebrow {
@@ -673,17 +702,17 @@ main {
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--blue-dark);
   margin-bottom: 4px;
 }
 
 .batch-title {
   font-family: 'Prompt', sans-serif;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.2px;
   margin-bottom: 18px;
-  color: var(--ink);
+  color: var(--text-main);
 }
 
 .batch-table-container {
@@ -701,8 +730,8 @@ main {
 }
 
 .batch-table th {
-  background-color: var(--sage-light);
-  color: var(--sage-dark);
+  background-color: var(--blue-light);
+  color: var(--blue-dark);
   font-weight: 600;
   padding: 12px 16px;
   font-size: 12px;
@@ -715,8 +744,8 @@ main {
 
 .batch-table td {
   padding: 14px 16px;
-  background: var(--tile-bg);
-  color: var(--ink);
+  background: #faf8f0;
+  color: var(--text-main);
   font-size: 13.5px;
 }
 
@@ -725,8 +754,8 @@ main {
 
 .batch-badge {
   display: inline-block;
-  background: var(--gold-light);
-  color: var(--gold-dark);
+  background: var(--mint-light);
+  color: var(--mint-dark);
   padding: 4px 12px;
   border-radius: 20px;
   font-weight: 600;
@@ -735,21 +764,21 @@ main {
 
 /* --- ส่วน Footer และนโยบายร้าน --- */
 .footer-section {
-  background: var(--surface);
+  background: var(--card-bg);
   padding: 30px 32px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   text-align: center;
 }
 
 .footer-title {
   font-family: 'Prompt', sans-serif;
-  font-size: 16.5px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.1px;
   margin-bottom: 18px;
-  color: var(--ink);
+  color: var(--text-main);
 }
 
 .contact-buttons {
@@ -784,32 +813,25 @@ main {
 }
 
 .shop-policy {
-  background: var(--tile-bg);
+  background: var(--primary-light);
   padding: 18px 20px;
-  border-radius: var(--radius-sm);
+  border-radius: 14px;
   font-size: 12.5px;
-  color: var(--ink);
+  color: var(--text-main);
   opacity: 0.9;
   text-align: left;
   line-height: 1.8;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(176, 16, 19, 0.12);
 }
 
-.shop-policy strong { color: var(--primary-dark); }
-
-.site-footer {
-  text-align: center;
-  padding: 30px 16px 10px;
-  font-size: 12px;
-  color: var(--ink-muted);
-}
+.shop-policy strong { color: var(--primary-hover); }
 
 /* --- Responsive สำหรับหน้าจอมือถือ --- */
 @media(max-width: 700px) {
-  main { padding: 8px 10px 40px; }
+  body { padding: 24px 10px 40px; }
   .search-card { padding: 28px 20px 24px; }
   .batch-section, .footer-section { padding: 24px 18px; }
-  .title { font-size: 21px; }
+  .title { font-size: 22px; }
   .order { font-size: 17px; }
   .search { flex-direction: column; }
   .search button { width: 100%; height: 52px; }
@@ -825,9 +847,6 @@ main {
 
 <body>
 
-<div class="top-strip"></div>
-
-<main>
 <div class="container">
 
 <div class="search-card">
@@ -888,7 +907,7 @@ main {
       </thead>
       <tbody id="batchTableBody">
         <tr>
-          <td colspan="5" style="text-align: center; color: var(--ink-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td>
+          <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td>
         </tr>
       </tbody>
     </table>
@@ -913,10 +932,7 @@ main {
   </div>
 </div>
 
-<div class="site-footer">Powered by Order Tracking System</div>
-
 </div>
-</main>
 
 <script>
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyHPz7y01sjBTy3bwGCRL89v-cRe7jen6ouu2txA5pVXklpkkHIsOZaeiHLoSfJKhLn/exec";
@@ -955,7 +971,7 @@ async function loadShippingBatches() {
     let tbody = document.getElementById("batchTableBody");
 
     if (!json.success || !json.data || json.data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--ink-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
       return;
     }
 
@@ -972,7 +988,7 @@ async function loadShippingBatches() {
     tbody.innerHTML = html;
   } catch (err) {
     console.error(err);
-    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--ink-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
+    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
   }
 }
 
@@ -1119,13 +1135,13 @@ function showData(data) {
   let rawOrder = data.order ? data.order.replace(/\r\n/g, '\n').replace(/\r/g, '\n') : "";
   let formattedOrder = rawOrder.replace(/\n/g, '<br>');
 
-  let trackingValueHtml = '<span class="info-tile-value muted">ยังไม่มีเลขพัสดุ</span>';
+  let trackingValueHtml = '<span style="color:var(--text-muted); font-weight:500;">ยังไม่มีเลขพัสดุ</span>';
   if (data.tracking && data.tracking.toString().trim() !== "" && data.tracking.toString().trim() !== "-") {
     let cleanTracking = data.tracking.toString().replace(/<[^>]*>/g, '').trim();
 
     trackingValueHtml = `
       <div class="tracking-row">
-        <span class="info-tile-value">${cleanTracking}</span>
+        <span style="font-size:14px; font-weight:700; color:var(--text-main);">${cleanTracking}</span>
         <button id="copyTrackBtn" class="copy-btn" onclick="copyTracking('${cleanTracking}')">📋 คัดลอก</button>
       </div>
       <a href="https://track.thailandpost.co.th/?trackNumber=${cleanTracking}" target="_blank" class="btn-track-link">
@@ -1134,9 +1150,9 @@ function showData(data) {
     `;
   }
 
-  let addressValueHtml = (data.address && data.address !== "-")
-    ? `<div class="info-tile-value">${data.address}</div>`
-    : `<div class="info-tile-value muted">⚠️ ไม่พบข้อมูลที่อยู่จัดส่งจัดเก็บในระบบชั่วคราว</div>`;
+  let addressHtml = (data.address && data.address !== "-")
+    ? `<div class="address-text">${data.address}</div>`
+    : `<div class="address-text empty">⚠️ ไม่พบข้อมูลที่อยู่จัดส่งจัดเก็บในระบบชั่วคราว</div>`;
 
   let statusPillClass = current === 5 ? "status-pill done" : "status-pill in-progress";
 
@@ -1154,34 +1170,37 @@ function showData(data) {
         </div>
       </div>
 
-      <div class="section-label">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-          <line x1="12" y1="22.08" x2="12" y2="12"></line>
-        </svg>
-        รายการสินค้า
-      </div>
-      <div class="info-tile">
+      <div class="box">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color); vertical-align:middle;">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          รายการสินค้าในคำสั่งซื้อนี้
+        </h3>
         <div class="product-content">${formattedOrder}</div>
       </div>
 
-      <div class="section-label spaced">ข้อมูลการจัดส่ง</div>
-      <div class="info-tile">
-        <div class="info-tile-label">✈️ รอบส่งออก</div>
-        <div class="info-tile-value">${data.batch || "-"}</div>
+      <div class="section-label">ข้อมูลการจัดส่ง</div>
+      <div class="info-grid">
+        <div class="info-row">
+          <div class="info-label">✈️ รอบส่งออก</div>
+          <div class="info-value">${data.batch || "-"}</div>
+        </div>
+        <div class="info-row align-start">
+          <div class="info-label">🚚 เลขพัสดุ</div>
+          <div class="info-value">${trackingValueHtml}</div>
+        </div>
       </div>
-      <div class="info-tile">
-        <div class="info-tile-label">🚚 เลขพัสดุ</div>
-        ${trackingValueHtml}
-      </div>
-      <div class="info-tile">
-        <div class="info-tile-label">🏠 ที่อยู่จัดส่ง</div>
-        ${addressValueHtml}
+
+      <div class="address-section">
+        <div class="address-section-label">🏠 ที่อยู่จัดส่ง</div>
+        ${addressHtml}
       </div>
 
       <div class="ticket-divider"></div>
-      <div class="section-label spaced">สถานะการจัดส่ง</div>
+      <div class="section-label" style="margin-top:26px;">สถานะการจัดส่ง</div>
       <div class="timeline-section">
         ${timeline}
       </div>
