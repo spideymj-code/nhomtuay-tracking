@@ -315,11 +315,34 @@ a { color: inherit; }
   to { opacity: 1; transform: none; }
 }
 
-.order {
-  font-size: 20px;
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.card-header-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-eyebrow {
+  font-size: 11px;
   font-weight: 700;
-  margin-bottom: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.order {
+  font-size: 19px;
+  font-weight: 700;
   color: var(--text-main);
+  word-break: break-word;
 }
 
 .badge {
@@ -330,7 +353,44 @@ a { color: inherit; }
   border-radius: 30px;
   font-weight: 600;
   font-size: 13px;
-  margin-bottom: 22px;
+  width: fit-content;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 13.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.status-pill .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-pill.in-progress {
+  background: var(--primary-light);
+  color: var(--primary-hover);
+}
+.status-pill.in-progress .dot {
+  background: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(176, 16, 19, 0.18);
+}
+
+.status-pill.done {
+  background: var(--mint-light);
+  color: var(--mint-dark);
+}
+.status-pill.done .dot {
+  background: var(--mint-dark);
+  box-shadow: 0 0 0 3px rgba(170, 204, 177, 0.3);
 }
 
 /* กล่องรายการสินค้า */
@@ -339,7 +399,7 @@ a { color: inherit; }
   padding: 20px;
   border-left: 4px solid var(--primary-color);
   border-radius: 16px;
-  margin-top: 16px;
+  margin-top: 22px;
   border-top: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
@@ -369,15 +429,57 @@ a { color: inherit; }
   word-break: break-word;
 }
 
-.info {
-  margin-top: 24px;
-  line-height: 2.2;
-  font-size: 14px;
+.section-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin: 26px 0 4px;
 }
 
-.info b {
-  color: var(--text-muted);
+.info-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row.align-start {
+  align-items: flex-start;
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
   font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.info-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: right;
+  min-width: 0;
 }
 
 .address-box {
@@ -385,7 +487,7 @@ a { color: inherit; }
   border: 1px dashed var(--border-color);
   padding: 14px 16px;
   border-radius: 12px;
-  margin-top: 6px;
+  margin-top: 8px;
   line-height: 1.6;
   font-size: 14px;
   color: var(--text-main);
@@ -394,7 +496,8 @@ a { color: inherit; }
 .tracking-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -412,6 +515,7 @@ a { color: inherit; }
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  flex-shrink: 0;
 }
 
 .copy-btn:hover {
@@ -427,8 +531,8 @@ a { color: inherit; }
   color: var(--primary-hover);
   text-decoration: underline;
   font-weight: 600;
-  font-size: 13px;
-  margin-top: 4px;
+  font-size: 12.5px;
+  margin-top: 6px;
 }
 
 .btn-track-link:hover {
@@ -697,11 +801,14 @@ a { color: inherit; }
   body { padding: 24px 10px 40px; }
   .search-card { padding: 28px 20px 24px; }
   .batch-section, .footer-section { padding: 24px 18px; }
-  .title { font-size: 32px; }
-  .order { font-size: 18px; }
+  .title { font-size: 22px; }
+  .order { font-size: 17px; }
   .search { flex-direction: column; }
   .search button { width: 100%; height: 52px; }
   .ticket-divider { margin-left: -20px; margin-right: -20px; }
+  .card { padding: 24px 20px; }
+  .card-header { flex-direction: column; align-items: flex-start; }
+  .status-pill { align-self: flex-start; }
 }
 
 </style>
@@ -998,17 +1105,17 @@ function showData(data) {
   let rawOrder = data.order ? data.order.replace(/\r\n/g, '\n').replace(/\r/g, '\n') : "";
   let formattedOrder = rawOrder.replace(/\n/g, '<br>');
 
-  let trackingHtml = "-";
+  let trackingValueHtml = '<span style="color:var(--text-muted); font-weight:500;">ยังไม่มีเลขพัสดุ</span>';
   if (data.tracking && data.tracking.toString().trim() !== "" && data.tracking.toString().trim() !== "-") {
     let cleanTracking = data.tracking.toString().replace(/<[^>]*>/g, '').trim();
 
-    trackingHtml = `
+    trackingValueHtml = `
       <div class="tracking-row">
-        <span style="font-size:16px; font-weight:700; color:var(--text-main);">${cleanTracking}</span>
+        <span style="font-size:14px; font-weight:700; color:var(--text-main);">${cleanTracking}</span>
         <button id="copyTrackBtn" class="copy-btn" onclick="copyTracking('${cleanTracking}')">📋 คัดลอก</button>
       </div>
       <a href="https://track.thailandpost.co.th/?trackNumber=${cleanTracking}" target="_blank" class="btn-track-link">
-        🔗 คลิกเพื่อไปหน้าเช็คพัสดุ (ไปรษณีย์ไทย EMS)
+        🔗 เช็คพัสดุ (ไปรษณีย์ไทย EMS)
       </a>
     `;
   }
@@ -1017,10 +1124,22 @@ function showData(data) {
     ? `<div class="address-box">${data.address}</div>`
     : `<div class="address-box" style="color:var(--text-muted); font-style:italic;">⚠️ ไม่พบข้อมูลที่อยู่จัดส่งจัดเก็บในระบบชั่วคราว</div>`;
 
+  let statusPillClass = current === 5 ? "status-pill done" : "status-pill in-progress";
+
   document.getElementById("result").innerHTML = `
     <div class="card">
-      <div class="order">เลขที่คำสั่งซื้อ : ${data.orderid}</div>
-      <div class="badge">${data.account}</div>
+      <div class="card-header">
+        <div class="card-header-main">
+          <div class="order-eyebrow">เลขที่คำสั่งซื้อ</div>
+          <div class="order">${data.orderid}</div>
+          <div class="badge">${data.account}</div>
+        </div>
+        <div class="${statusPillClass}">
+          <span class="dot"></span>
+          ${data.status}
+        </div>
+      </div>
+
       <div class="box">
         <h3>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color); vertical-align:middle;">
@@ -1032,13 +1151,25 @@ function showData(data) {
         </h3>
         <div class="product-content">${formattedOrder}</div>
       </div>
-      <div class="info">
-        <div style="margin-bottom:4px;"><b>✈️ รอบส่งออก :</b> ${data.batch || "-"}</div>
-        <div><b>🚚 เลขพัสดุ :</b> ${trackingHtml}</div>
-        <div style="margin-top:4px;"><b>📌 สถานะปัจจุบัน :</b> <span style="color:var(--primary-hover); font-weight:600;">${data.status}</span></div>
-        <div style="margin-top:8px;"><b>🏠 ที่อยู่จัดส่ง :</b> ${addressHtml}</div>
+
+      <div class="section-label">ข้อมูลการจัดส่ง</div>
+      <div class="info-grid">
+        <div class="info-row">
+          <div class="info-label">✈️ รอบส่งออก</div>
+          <div class="info-value">${data.batch || "-"}</div>
+        </div>
+        <div class="info-row align-start">
+          <div class="info-label">🚚 เลขพัสดุ</div>
+          <div class="info-value">${trackingValueHtml}</div>
+        </div>
+        <div class="info-row align-start">
+          <div class="info-label">🏠 ที่อยู่จัดส่ง</div>
+          <div class="info-value" style="width:100%;">${addressHtml}</div>
+        </div>
       </div>
+
       <div class="ticket-divider"></div>
+      <div class="section-label" style="margin-top:26px;">สถานะการจัดส่ง</div>
       ${timeline}
     </div>
   `;
