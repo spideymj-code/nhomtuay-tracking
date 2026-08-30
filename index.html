@@ -482,15 +482,36 @@ a { color: inherit; }
   min-width: 0;
 }
 
-.address-box {
+.address-section {
+  margin-top: 18px;
   background: #faf8f0;
-  border: 1px dashed var(--border-color);
-  padding: 14px 16px;
-  border-radius: 12px;
-  margin-top: 8px;
-  line-height: 1.6;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--blue);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.address-section-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 10px;
+}
+
+.address-text {
   font-size: 14px;
+  line-height: 1.7;
   color: var(--text-main);
+}
+
+.address-text.empty {
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 .tracking-row {
@@ -561,13 +582,22 @@ a { color: inherit; }
 .ticket-divider::after { right: -3px; background: var(--primary-color); }
 
 /* --- ✨ ไทม์ไลน์แนวตั้ง --- */
+.timeline-section {
+  margin-top: 8px;
+  background: #faf8f0;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--mint-dark);
+  border-radius: 16px;
+  padding: 22px 20px 18px;
+}
+
 .timeline-vertical {
-  margin-top: 30px;
+  margin-top: 4px;
   position: relative;
   padding-left: 4px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 .timeline-vertical::before {
@@ -1121,8 +1151,8 @@ function showData(data) {
   }
 
   let addressHtml = (data.address && data.address !== "-")
-    ? `<div class="address-box">${data.address}</div>`
-    : `<div class="address-box" style="color:var(--text-muted); font-style:italic;">⚠️ ไม่พบข้อมูลที่อยู่จัดส่งจัดเก็บในระบบชั่วคราว</div>`;
+    ? `<div class="address-text">${data.address}</div>`
+    : `<div class="address-text empty">⚠️ ไม่พบข้อมูลที่อยู่จัดส่งจัดเก็บในระบบชั่วคราว</div>`;
 
   let statusPillClass = current === 5 ? "status-pill done" : "status-pill in-progress";
 
@@ -1162,15 +1192,18 @@ function showData(data) {
           <div class="info-label">🚚 เลขพัสดุ</div>
           <div class="info-value">${trackingValueHtml}</div>
         </div>
-        <div class="info-row align-start">
-          <div class="info-label">🏠 ที่อยู่จัดส่ง</div>
-          <div class="info-value" style="width:100%;">${addressHtml}</div>
-        </div>
+      </div>
+
+      <div class="address-section">
+        <div class="address-section-label">🏠 ที่อยู่จัดส่ง</div>
+        ${addressHtml}
       </div>
 
       <div class="ticket-divider"></div>
-      <div class="section-label" style="margin-top:26px;">สถานะการจัดส่ง</div>
-      ${timeline}
+      <div class="section-label" style="margin-top:26px;">สถานะคำสั่งซื้อ</div>
+      <div class="timeline-section">
+        ${timeline}
+      </div>
     </div>
   `;
 }
