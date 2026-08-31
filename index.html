@@ -5,23 +5,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 /* --- 🎨 ดีไซน์โทนสีและตัวแปรหลัก (Design Tokens) --- */
+/* Palette: Crimson Red #B01013 · Baby Blue #A2B9D5 · Vanilla Cream #F4F2E2 · Mint Green #AACCB1 */
 :root {
-  --primary-color: #ff5c93;        
-  --primary-hover: #ff3378;        
-  --primary-light: #fff0f5;
-  --bg-gradient-start: #fff5f8;        
-  --bg-gradient-end: #f0f4ff;        
-  --text-main: #2d3748;            
-  --text-muted: #718096;
-  --border-color: #e2e8f0;
-  --card-bg: #ffffff;
-  --shadow-sm: 0 4px 20px rgba(255, 92, 147, 0.06);
-  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.04);
+  --primary-color: #b01013;
+  --primary-hover: #8c0d10;
+  --primary-light: #fbe7e6;
+
+  --blue: #a2b9d5;
+  --blue-dark: #6d87a8;
+  --blue-light: #eef2f8;
+
+  --mint: #aaccb1;
+  --mint-dark: #6f9878;
+  --mint-light: #eaf4ec;
+
+  --bg-gradient-start: #f6f3e6;
+  --bg-gradient-end: #e7ecf3;
+
+  --text-main: #362f2a;
+  --text-muted: #8d8375;
+
+  --border-color: #e9e1cf;
+  --card-bg: #fffdf8;
+
+  --shadow-sm: 0 4px 20px rgba(176, 16, 19, 0.06);
+  --shadow-lg: 0 20px 44px rgba(54, 47, 42, 0.08);
+
+  --radius-lg: 26px;
+  --radius-md: 18px;
 }
 
 * {
@@ -32,163 +49,265 @@
 
 body {
   font-family: 'Prompt', sans-serif;
-  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-  padding: 40px 16px;
+  background: linear-gradient(160deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  background-attachment: fixed;
+  padding: 40px 16px 60px;
   color: var(--text-main);
   min-height: 100vh;
 }
 
 .container {
-  max-width: 760px; 
+  max-width: 760px;
   margin: auto;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--blue-dark);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 /* --- การ์ดหลักและส่วนค้นหา --- */
 .search-card {
   background: var(--card-bg);
-  padding: 40px 32px;
-  border-radius: 28px; 
+  padding: 36px 32px 32px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(255, 92, 147, 0.1);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--blue) 50%, var(--mint) 100%);
+}
+
+.banner-wrap {
+  margin: 6px 0 26px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(54, 47, 42, 0.12);
+  position: relative;
 }
 
 .banner-img {
   width: 100%;
   height: auto;
-  border-radius: 20px;
-  margin-bottom: 28px;
   display: block;
   object-fit: cover;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 /* --- กล่องประกาศ --- */
 .announce-box {
-  background: var(--primary-light);
-  border: 1px dashed var(--primary-color);
-  padding: 20px 24px;
-  border-radius: 18px;
-  margin-bottom: 28px;
-  display: none; 
+  background: var(--blue-light);
+  border: 1.5px dashed var(--blue-dark);
+  padding: 18px 22px;
+  border-radius: var(--radius-md);
+  margin-bottom: 26px;
+  display: none;
   line-height: 1.6;
 }
 
 .announce-title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   margin-bottom: 6px;
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--primary-hover);
+  color: var(--blue-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 #announceText {
   font-size: 14px;
-  color: #555;
+  color: var(--text-main);
+  opacity: 0.85;
+}
+
+.eyebrow {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mint-dark);
+  margin-bottom: 6px;
 }
 
 .title {
-  font-size: 26px;
+  font-family: 'Prompt', sans-serif;
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 24px;
+  letter-spacing: -0.3px;
+  margin-bottom: 26px;
   text-align: center;
   color: var(--text-main);
-  letter-spacing: 0.3px;
+  line-height: 1.3;
 }
 
 /* --- ฟอร์มค้นหา --- */
 .search {
   display: flex;
-  gap: 12px;
+  gap: 10px;
+}
+
+.search-input-wrap {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+}
+
+.search-input-wrap svg {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
 }
 
 .search input {
-  flex: 1;
+  width: 100%;
   height: 56px;
   border-radius: 16px;
   border: 2px solid var(--border-color);
-  padding: 0 20px;
+  padding: 0 18px 0 46px;
   font-size: 16px;
+  font-family: inherit;
   outline: none;
   transition: all 0.25s ease;
-  background: #fcfdfe;
+  background: #fcfbf6;
   color: var(--text-main);
-  min-width: 0;
+}
+
+.search input::placeholder {
+  color: var(--text-muted);
 }
 
 .search input:focus {
   border-color: var(--primary-color);
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(255, 92, 147, 0.12);
+  box-shadow: 0 0 0 4px rgba(176, 16, 19, 0.12);
 }
 
 .search button {
-  width: 130px;
+  width: 128px;
   flex-shrink: 0;
   border: none;
   background: var(--primary-color);
   color: white;
   font-size: 16px;
   font-weight: 600;
+  font-family: inherit;
   border-radius: 16px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(255, 92, 147, 0.3);
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 16px rgba(176, 16, 19, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .search button:hover {
   background: var(--primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(255, 92, 147, 0.4);
+  box-shadow: 0 8px 20px rgba(176, 16, 19, 0.36);
 }
 
 .search button:active {
   transform: translateY(0);
 }
 
+.search button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* ประวัติการค้นหาล่าสุด */
 .history-container {
-  margin-top: 14px;
+  margin-top: 16px;
   font-size: 13px;
   color: var(--text-muted);
   display: none;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  padding-left: 4px;
+  padding-left: 2px;
 }
 
 .history-tag {
-  background: #edf2f7;
-  padding: 5px 14px;
+  background: var(--blue-light);
+  padding: 6px 16px;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s;
-  color: #4a5568;
+  color: var(--blue-dark);
   font-weight: 500;
+  border: 1px solid transparent;
 }
 
 .history-tag:hover {
   background: var(--primary-light);
   color: var(--primary-hover);
+  border-color: var(--primary-color);
 }
 
 #result {
-  margin-top: 32px;
+  margin-top: 30px;
+}
+
+/* --- สถานะกำลังโหลด (Skeleton) --- */
+.loading-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* --- กล่องผลลัพธ์การค้นหา --- */
 .card {
   background: var(--card-bg);
   padding: 32px;
-  border-radius: 24px;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
-  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes fadeIn {
@@ -196,51 +315,112 @@ body {
   to { opacity: 1; transform: none; }
 }
 
-.order {
-  font-size: 20px;
-  font-weight: 700;
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
   margin-bottom: 6px;
+}
+
+.card-header-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.order {
+  font-size: 19px;
+  font-weight: 700;
   color: var(--text-main);
+  word-break: break-word;
 }
 
 .badge {
   display: inline-block;
-  background: var(--primary-light);
-  color: var(--primary-hover);
+  background: var(--blue-light);
+  color: var(--blue-dark);
   padding: 5px 14px;
   border-radius: 30px;
   font-weight: 600;
   font-size: 13px;
-  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 13.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.status-pill .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-pill.in-progress {
+  background: var(--primary-light);
+  color: var(--primary-hover);
+}
+.status-pill.in-progress .dot {
+  background: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(176, 16, 19, 0.18);
+}
+
+.status-pill.done {
+  background: var(--mint-light);
+  color: var(--mint-dark);
+}
+.status-pill.done .dot {
+  background: var(--mint-dark);
+  box-shadow: 0 0 0 3px rgba(170, 204, 177, 0.3);
 }
 
 /* กล่องรายการสินค้า */
 .box {
-  background: #f8fafc;
+  background: #faf8f0;
   padding: 20px;
   border-left: 4px solid var(--primary-color);
   border-radius: 16px;
-  margin-top: 16px;
-  border-top: 1px solid #edf2f7;
-  border-right: 1px solid #edf2f7;
-  border-bottom: 1px solid #edf2f7;
+  margin-top: 22px;
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .box h3 {
   margin-bottom: 12px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 6px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 
-/* ปรับกล่องข้อความภายในให้รวมอยู่ในกล่องสีขาวชิ้นเดียวและเว้นบรรทัด */
 .product-content {
   font-size: 14px;
   background: #ffffff;
-  padding: 12px 16px;
+  padding: 14px 16px;
   border-radius: 10px;
   border: 1px solid var(--border-color);
   color: var(--text-main);
@@ -249,26 +429,120 @@ body {
   word-break: break-word;
 }
 
-.info {
-  margin-top: 24px;
-  line-height: 2.2;
-  font-size: 14px;
-}
-
-.info b {
+.section-label {
+  font-size: 13px;
   color: var(--text-muted);
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin: 26px 0 4px;
 }
 
-.address-box {
-  background: #f8fafc;
-  border: 1px dashed #cbd5e0;
-  padding: 14px 16px;
-  border-radius: 12px;
-  margin-top: 6px;
-  line-height: 1.6;
+.info-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row.align-start {
+  align-items: flex-start;
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.info-value {
   font-size: 14px;
+  font-weight: 600;
   color: var(--text-main);
+  text-align: right;
+  min-width: 0;
+}
+
+.address-section {
+  margin-top: 18px;
+  background: #faf8f0;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--blue);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.address-section-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 10px;
+}
+
+.address-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+
+.address-text.empty {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.tracking-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.copy-btn {
+  border: 1px solid var(--border-color);
+  background: #fff;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.copy-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: var(--primary-light);
 }
 
 .btn-track-link {
@@ -278,33 +552,62 @@ body {
   color: var(--primary-hover);
   text-decoration: underline;
   font-weight: 600;
-  font-size: 13px;
-  margin-top: 2px;
+  font-size: 12.5px;
+  margin-top: 6px;
 }
 
 .btn-track-link:hover {
   color: var(--primary-color);
 }
 
-/* --- ✨ ดีไซน์ Timeline แนวตั้งใหม่ที่ดูพรีเมียมขึ้น --- */
-.timeline-vertical {
-  margin-top: 35px;
+/* --- ตั๋วคั่นระหว่างข้อมูลออเดอร์กับไทม์ไลน์ (Signature: ticket stub) --- */
+.ticket-divider {
   position: relative;
-  padding-left: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+  border-top: 2px dashed var(--border-color);
+  margin: 30px 0 0;
 }
 
-/* เส้นเชื่อมระหว่างสถานะ */
+.ticket-divider::before,
+.ticket-divider::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--mint);
+}
+
+.ticket-divider::before { left: -3px; }
+.ticket-divider::after { right: -3px; background: var(--primary-color); }
+
+/* --- ✨ ไทม์ไลน์แนวตั้ง --- */
+.timeline-section {
+  margin-top: 8px;
+  background: #faf8f0;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--mint-dark);
+  border-radius: 16px;
+  padding: 22px 20px 18px;
+}
+
+.timeline-vertical {
+  margin-top: 4px;
+  position: relative;
+  padding-left: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .timeline-vertical::before {
   content: "";
   position: absolute;
   top: 10px;
   bottom: 10px;
-  left: 42px;
+  left: 19px;
   width: 3px;
-  background: #edf2f7;
+  background: var(--border-color);
   z-index: 0;
 }
 
@@ -316,36 +619,33 @@ body {
   gap: 18px;
 }
 
-/* วงกลมไอคอนหลัก */
 .timeline-circle {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   background: #ffffff;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   flex-shrink: 0;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 6px rgba(54, 47, 42, 0.04);
 }
 
-/* สถานะที่ผ่านไปแล้ว (Done) */
 .timeline-circle.done {
-  background: #f0fff4;
-  border-color: #48bb78;
-  color: #48bb78;
-  box-shadow: 0 0 0 4px rgba(72, 187, 120, 0.12);
+  background: var(--mint-light);
+  border-color: var(--mint-dark);
+  color: var(--mint-dark);
+  box-shadow: 0 0 0 4px rgba(170, 204, 177, 0.25);
 }
 
-/* สถานะปัจจุบัน (Active) */
 .timeline-circle.active {
   background: var(--primary-light);
   border-color: var(--primary-color);
   transform: scale(1.15);
-  box-shadow: 0 0 0 6px rgba(255, 92, 147, 0.15);
+  box-shadow: 0 0 0 6px rgba(176, 16, 19, 0.15);
 }
 
 .timeline-content {
@@ -374,26 +674,43 @@ body {
 
 .notfound {
   background: var(--card-bg);
-  padding: 36px;
-  border-radius: 20px;
+  padding: 40px 30px;
+  border-radius: var(--radius-lg);
   text-align: center;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-muted);
   border: 2px dashed var(--border-color);
+  line-height: 1.7;
+}
+
+.notfound-icon {
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 /* --- ตารางรอบขนส่งภาพรวม --- */
 .batch-section {
   background: var(--card-bg);
-  padding: 32px;
-  border-radius: 24px;
+  padding: 30px 32px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
 }
 
-.batch-title {
-  font-size: 18px;
+.section-eyebrow {
+  font-size: 11px;
   font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+  margin-bottom: 4px;
+}
+
+.batch-title {
+  font-family: 'Prompt', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
   margin-bottom: 18px;
   color: var(--text-main);
 }
@@ -405,30 +722,40 @@ body {
 
 .batch-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 6px;
   text-align: left;
   font-size: 14px;
-  min-width: 520px;
+  min-width: 540px;
 }
 
 .batch-table th {
-  background-color: var(--primary-light);
-  color: var(--primary-hover);
+  background-color: var(--blue-light);
+  color: var(--blue-dark);
   font-weight: 600;
   padding: 12px 16px;
-  border-radius: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
+
+.batch-table th:first-child { border-radius: 10px 0 0 10px; }
+.batch-table th:last-child { border-radius: 0 10px 10px 0; }
 
 .batch-table td {
   padding: 14px 16px;
-  border-bottom: 1px solid #f7fafc;
-  color: #4a5568;
+  background: #faf8f0;
+  color: var(--text-main);
+  font-size: 13.5px;
 }
+
+.batch-table td:first-child { border-radius: 10px 0 0 10px; }
+.batch-table td:last-child { border-radius: 0 10px 10px 0; }
 
 .batch-badge {
   display: inline-block;
-  background: #ebf8ff;
-  color: #3182ce;
+  background: var(--mint-light);
+  color: var(--mint-dark);
   padding: 4px 12px;
   border-radius: 20px;
   font-weight: 600;
@@ -438,17 +765,19 @@ body {
 /* --- ส่วน Footer และนโยบายร้าน --- */
 .footer-section {
   background: var(--card-bg);
-  padding: 32px;
-  border-radius: 24px;
+  padding: 30px 32px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
   text-align: center;
 }
 
 .footer-title {
-  font-size: 16px;
+  font-family: 'Prompt', sans-serif;
+  font-size: 17px;
   font-weight: 700;
-  margin-bottom: 16px;
+  letter-spacing: -0.1px;
+  margin-bottom: 18px;
   color: var(--text-main);
 }
 
@@ -473,32 +802,43 @@ body {
 }
 
 .btn-x {
-  background: #1a202c;
+  background: #1a1a1a;
   color: white;
-  box-shadow: 0 4px 12px rgba(26, 32, 44, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 .btn-x:hover {
-  background: #2d3748;
+  background: #333;
   transform: translateY(-1px);
 }
 
 .shop-policy {
-  background: #f8fafc;
+  background: var(--primary-light);
   padding: 18px 20px;
   border-radius: 14px;
-  font-size: 12px; 
-  color: var(--text-muted);
+  font-size: 12.5px;
+  color: var(--text-main);
+  opacity: 0.9;
   text-align: left;
   line-height: 1.8;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(176, 16, 19, 0.12);
 }
 
-/* --- Responsive สำหรับหน้าจอ มือถือ --- */
+.shop-policy strong { color: var(--primary-hover); }
+
+/* --- Responsive สำหรับหน้าจอมือถือ --- */
 @media(max-width: 700px) {
-  body { padding: 16px 10px; }
-  .search-card, .batch-section, .footer-section { padding: 24px 18px; }
-  .order { font-size: 18px; }
+  body { padding: 24px 10px 40px; }
+  .search-card { padding: 28px 20px 24px; }
+  .batch-section, .footer-section { padding: 24px 18px; }
+  .title { font-size: 22px; }
+  .order { font-size: 17px; }
+  .search { flex-direction: column; }
+  .search button { width: 100%; height: 52px; }
+  .ticket-divider { margin-left: -20px; margin-right: -20px; }
+  .card { padding: 24px 20px; }
+  .card-header { flex-direction: column; align-items: flex-start; }
+  .status-pill { align-self: flex-start; }
 }
 
 </style>
@@ -511,20 +851,35 @@ body {
 
 <div class="search-card">
 
-<img src="https://drive.google.com/thumbnail?id=1SjUczMQQtUKvBlK_0h5I5bFKZHSA7KV_&sz=w1200" alt="Shop Banner" class="banner-img">
+<div class="banner-wrap">
+  <img src="https://drive.google.com/thumbnail?id=1SjUczMQQtUKvBlK_0h5I5bFKZHSA7KV_&sz=w1200" alt="Shop Banner" class="banner-img">
+</div>
 
 <div id="announceBox" class="announce-box">
-  <div class="announce-title">📢 ประกาศจากทางร้าน:</div>
+  <div class="announce-title">📢 ประกาศจากทางร้าน</div>
   <div id="announceText">กำลังโหลดประกาศ...</div>
 </div>
 
+<div class="eyebrow">Order Tracking</div>
 <div class="title">
-📦 ระบบเช็คสถานะคำสั่งซื้อ
+เช็คสถานะคำสั่งซื้อ
 </div>
 
 <div class="search">
-  <input id="tracking" placeholder="กรอกเลขที่คำสั่งซื้อ" onkeypress="handleKeyPress(event)">
-  <button onclick="search()">ค้นหา</button>
+  <div class="search-input-wrap">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input id="tracking" placeholder="กรอกเลขที่คำสั่งซื้อ" onkeypress="handleKeyPress(event)">
+  </div>
+  <button id="searchBtn" onclick="search()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    ค้นหา
+  </button>
 </div>
 
 <div id="historyContainer" class="history-container">
@@ -537,7 +892,8 @@ body {
 </div>
 
 <div class="batch-section">
-  <div class="batch-title">🚢 อัพเดตสถานะรอบขนส่งภาพรวม</div>
+  <div class="section-eyebrow">Shipping Update</div>
+  <div class="batch-title">อัพเดตสถานะรอบขนส่งภาพรวม</div>
   <div class="batch-table-container">
     <table class="batch-table">
       <thead>
@@ -551,7 +907,7 @@ body {
       </thead>
       <tbody id="batchTableBody">
         <tr>
-          <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td>
+          <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td>
         </tr>
       </tbody>
     </table>
@@ -568,10 +924,10 @@ body {
       ติดต่อทาง X (@nhommtuay)
     </a>
   </div>
-  
+
   <div class="shop-policy">
     <strong>📌 สถานการณ์และมาตรการความเข้มงวดในปัจจุบันส่งผลให้ระยะเวลาการดำเนินงานเพิ่มขึ้น:</strong><br>
-    • Air Cargo ใช้ระยะเวลาดำเนินการ <strong> 1-3 สัปดาห์ </strong> เนื่องจากต้องจัดเตรียมเอกสารที่เกี่ยวข้องให้ถูกต้องและครบถ้วนเพื่อใช้ในดำเนินการส่งออกสินค้า ทั้งนี้ ระยะเวลาการนำเข้าสินค้าอาจมีการเปลี่ยนแปลงได้ตามขั้นตอนพิธีการศุลกากร <br>
+    • Air Cargo ใช้ระยะเวลาดำเนินการ <strong>1-3 สัปดาห์</strong> เนื่องจากต้องจัดเตรียมเอกสารที่เกี่ยวข้องให้ถูกต้องและครบถ้วนเพื่อใช้ในดำเนินการส่งออกสินค้า ทั้งนี้ ระยะเวลาการนำเข้าสินค้าอาจมีการเปลี่ยนแปลงได้ตามขั้นตอนพิธีการศุลกากร<br>
     • เมื่อทางร้านได้รับสินค้าจากทางชิปปิ้งแล้ว จะใช้เวลาแพ็คและทยอยจัดส่งออกภายใน 1-2 วันทำการตามลำดับค่ะ
   </div>
 </div>
@@ -584,7 +940,7 @@ const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyHPz7y01sjBTy3bwGC
 window.onload = function() {
   loadAnnouncement();
   loadShippingBatches();
-  showSearchHistory(); 
+  showSearchHistory();
 };
 
 function handleKeyPress(e) {
@@ -613,12 +969,12 @@ async function loadShippingBatches() {
     let res = await fetch(`${WEB_APP_URL}?action=shippingBatches`);
     let json = await res.json();
     let tbody = document.getElementById("batchTableBody");
-    
+
     if (!json.success || !json.data || json.data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
       return;
     }
-    
+
     let html = "";
     json.data.forEach(function(item) {
       html += `<tr>
@@ -632,7 +988,7 @@ async function loadShippingBatches() {
     tbody.innerHTML = html;
   } catch (err) {
     console.error(err);
-    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
+    document.getElementById("batchTableBody").innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px; border-radius: 10px;">ยังไม่มีการอัพเดตรอบขนส่งในขณะนี้</td></tr>`;
   }
 }
 
@@ -646,7 +1002,15 @@ async function search() {
 
   saveSearchHistory(tracking);
 
-  document.getElementById("result").innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted);">🔍 กำลังค้นหาข้อมูลคำสั่งซื้อ...</div>`;
+  let btn = document.getElementById("searchBtn");
+  btn.disabled = true;
+
+  document.getElementById("result").innerHTML = `
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <div>กำลังค้นหาข้อมูลคำสั่งซื้อ...</div>
+    </div>
+  `;
 
   try {
     let res = await fetch(`${WEB_APP_URL}?action=search&trackingNo=${encodeURIComponent(tracking)}`);
@@ -659,6 +1023,8 @@ async function search() {
   } catch (e) {
     alert("ไม่สามารถเชื่อมต่อระบบได้");
     document.getElementById("result").innerHTML = "";
+  } finally {
+    btn.disabled = false;
   }
 }
 
@@ -680,12 +1046,24 @@ function clickHistory(value) {
   search();
 }
 
+function copyTracking(value) {
+  navigator.clipboard.writeText(value).then(function() {
+    let btn = document.getElementById("copyTrackBtn");
+    if (btn) {
+      let original = btn.innerHTML;
+      btn.innerHTML = "✓ คัดลอกแล้ว";
+      setTimeout(function() { btn.innerHTML = original; }, 1500);
+    }
+  });
+}
+
 function showData(data) {
 
   if (data == null) {
     document.getElementById("result").innerHTML = `
       <div class="notfound">
-        ❌ ไม่พบข้อมูลเลขคำสั่งซื้อนี้ กรุณาตรวจสอบใหม่อีกครั้งค่ะ
+        <div class="notfound-icon">🔎</div>
+        ไม่พบข้อมูลเลขคำสั่งซื้อนี้<br>กรุณาตรวจสอบเลขที่คำสั่งซื้อแล้วลองใหม่อีกครั้งค่ะ
       </div>
     `;
     return;
@@ -732,7 +1110,7 @@ function showData(data) {
     } else if (i === current) {
       circleCls += " active";
       itemCls += " is-active";
-      
+
       if (i === 0) {
         subText = "ดำเนินการเรียบร้อย";
       } else if (i === 4) {
@@ -757,27 +1135,41 @@ function showData(data) {
   let rawOrder = data.order ? data.order.replace(/\r\n/g, '\n').replace(/\r/g, '\n') : "";
   let formattedOrder = rawOrder.replace(/\n/g, '<br>');
 
-  let trackingHtml = "-";
+  let trackingValueHtml = '<span style="color:var(--text-muted); font-weight:500;">ยังไม่มีเลขพัสดุ</span>';
   if (data.tracking && data.tracking.toString().trim() !== "" && data.tracking.toString().trim() !== "-") {
     let cleanTracking = data.tracking.toString().replace(/<[^>]*>/g, '').trim();
 
-    trackingHtml = `
-      <span style="font-size:16px; font-weight:700; color:var(--text-main);">${cleanTracking}</span>
-      <br>
+    trackingValueHtml = `
+      <div class="tracking-row">
+        <span style="font-size:14px; font-weight:700; color:var(--text-main);">${cleanTracking}</span>
+        <button id="copyTrackBtn" class="copy-btn" onclick="copyTracking('${cleanTracking}')">📋 คัดลอก</button>
+      </div>
       <a href="https://track.thailandpost.co.th/?trackNumber=${cleanTracking}" target="_blank" class="btn-track-link">
-        🔗 คลิกเพื่อไปหน้าเช็คพัสดุ (ไปรษณีย์ไทย EMS)
+        🔗 เช็คพัสดุ (ไปรษณีย์ไทย EMS)
       </a>
     `;
   }
 
   let addressHtml = (data.address && data.address !== "-")
-    ? `<div class="address-box">${data.address}</div>`
-    : `<div class="address-box" style="color:var(--text-muted); font-style:italic;">⚠️ ไม่พบข้อมูลที่อยู่จัดส่งจัดเก็บในระบบชั่วคราว</div>`;
+    ? `<div class="address-text">${data.address}</div>`
+    : `<div class="address-text empty">⚠️ ไม่พบข้อมูลที่อยู่จัดส่งจัดเก็บในระบบชั่วคราว</div>`;
+
+  let statusPillClass = current === 5 ? "status-pill done" : "status-pill in-progress";
 
   document.getElementById("result").innerHTML = `
     <div class="card">
-      <div class="order">เลขที่คำสั่งซื้อ : ${data.orderid}</div>
-      <div class="badge">${data.account}</div>
+      <div class="card-header">
+        <div class="card-header-main">
+          <div class="order-eyebrow">เลขที่คำสั่งซื้อ</div>
+          <div class="order">${data.orderid}</div>
+          <div class="badge">${data.account}</div>
+        </div>
+        <div class="${statusPillClass}">
+          <span class="dot"></span>
+          ${data.status}
+        </div>
+      </div>
+
       <div class="box">
         <h3>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-color); vertical-align:middle;">
@@ -789,13 +1181,29 @@ function showData(data) {
         </h3>
         <div class="product-content">${formattedOrder}</div>
       </div>
-      <div class="info">
-        <div style="margin-bottom:4px;"><b>✈️ รอบส่งออก :</b> ${data.batch || "-"}</div>
-        <div><b>🚚 เลขพัสดุ :</b> ${trackingHtml}</div>
-        <div style="margin-top:4px;"><b>📌 สถานะปัจจุบัน :</b> <span style="color:var(--primary-hover); font-weight:600;">${data.status}</span></div>
-        <div style="margin-top:8px;"><b>🏠 ที่อยู่จัดส่ง :</b> ${addressHtml}</div>
+
+      <div class="section-label">ข้อมูลการจัดส่ง</div>
+      <div class="info-grid">
+        <div class="info-row">
+          <div class="info-label">✈️ รอบส่งออก</div>
+          <div class="info-value">${data.batch || "-"}</div>
+        </div>
+        <div class="info-row align-start">
+          <div class="info-label">🚚 เลขพัสดุ</div>
+          <div class="info-value">${trackingValueHtml}</div>
+        </div>
       </div>
-      ${timeline}
+
+      <div class="address-section">
+        <div class="address-section-label">🏠 ที่อยู่จัดส่ง</div>
+        ${addressHtml}
+      </div>
+
+      <div class="ticket-divider"></div>
+      <div class="section-label" style="margin-top:26px;">สถานะการจัดส่ง</div>
+      <div class="timeline-section">
+        ${timeline}
+      </div>
     </div>
   `;
 }
@@ -803,4 +1211,3 @@ function showData(data) {
 </script>
 </body>
 </html>
- 
